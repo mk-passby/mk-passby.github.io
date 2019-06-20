@@ -11,7 +11,7 @@
 
     <title>
         
-        About - mk-passby的博客 | mk-passby&#39;s Blog
+        抽象工厂模式 - mk-passby的博客 | mk-passby&#39;s Blog
         
     </title>
 
@@ -71,7 +71,7 @@
                     <span>存档</span>
                 </a>
             </li>
-            <li  class=active >
+            <li >
                 <a href="/about/">
                     <i class="iconfont icon-guanyu2"></i>
                     <span>关于</span>
@@ -87,6 +87,10 @@
             
         </ul>
     </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-比较工厂方法模式"><span class="toc-text">1.比较工厂方法模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#工厂方法模式："><span class="toc-text">工厂方法模式：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽象工厂模式："><span class="toc-text">抽象工厂模式：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-抽象工厂模式举例"><span class="toc-text">2.抽象工厂模式举例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-总结"><span class="toc-text">3.总结</span></a></li></ol>
+</div>
     
 </div>
 
@@ -111,57 +115,54 @@
     <div class="index-middle">
         <!-- Main Content -->
         
-<div class="post-content ">
-    <p>想说却还没说的 还很多  </p>
-<p>攒着是因为想写成歌  </p>
-<p>让人轻轻地唱着 淡淡地记着  </p>
-<p>就算终于忘了 也值了  </p>
-<p>说不定我一生涓滴意念  </p>
-<p>侥幸汇成河  </p>
-<p>然后我俩各自一端  </p>
-<p>望着大河弯弯 终于敢放胆  </p>
-<p>嘻皮笑脸 面对 人生的难  </p>
-<p>也许我们从未成熟</p>
-<p>还没能晓得 就快要老了</p>
-<p>尽管心里活着的还是那个</p>
-<p>年轻人</p>
-<p>因为不安而频频回首</p>
-<p>无知地索求 羞耻于求救</p>
-<p>不知疲倦地翻越 每一个山丘</p>
-<p>越过山丘 虽然已白了头</p>
-<p>喋喋不休 时不我予的哀愁</p>
-<p>还未如愿见着不朽</p>
-<p>就把自己先搞丢</p>
-<p>越过山丘 才发现无人等候</p>
-<p>喋喋不休 再也唤不回温柔</p>
-<p>为何记不得上一次是谁给的拥抱  </p>
-<p>在什么时候  </p>
-<p>我没有刻意隐藏 也无意让你感伤  </p>
-<p>多少次我们无醉不欢  </p>
-<p>咒骂人生太短 唏嘘相见恨晚  </p>
-<p>让女人把妆哭花了 也不管  </p>
-<p>遗憾我们从未成熟  </p>
-<p>还没能晓得 就已经老了</p>
-<p>尽力却仍不明白  </p>
-<p>身边的年轻人  </p>
-<p>给自己随便找个理由  </p>
-<p>向情爱的挑逗 命运的左右  </p>
-<p>不自量力地还手 直至死方休  </p>
-<p>越过山丘 虽然已白了头 </p>
-<p>喋喋不休 时不我予的哀愁  </p>
-<p>还未如愿见着不朽  </p>
-<p>就把自己先搞丢  </p>
-<p>越过山丘 才发现无人等候  </p>
-<p>喋喋不休 再也唤不回了温柔  </p>
-<p>为何记不得上一次是谁给的拥抱  </p>
-<p>在什么时候  </p>
-<p style="margin-left:200px;color:#BBBBBB">—— 山丘</p>
 
 
-    
-    <div id="comment-container">
+<div class="post-container">
+    <div class="post-title">
+        抽象工厂模式
     </div>
-    <div id="lv-container">
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-03-26 14:40:00</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#设计模式" title="设计模式">设计模式</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="1-比较工厂方法模式"><a href="#1-比较工厂方法模式" class="headerlink" title="1.比较工厂方法模式"></a>1.比较工厂方法模式</h1><h2 id="工厂方法模式："><a href="#工厂方法模式：" class="headerlink" title="工厂方法模式："></a>工厂方法模式：</h2><ul>
+<li>一个抽象产品类，可以派生出多个具体产品类。</li>
+<li>一个抽象工厂类，可以派生出多个具体工厂类。 每个具体工厂类只能创建一个具体产品类的实例。</li>
+<li>工厂方法模式只有一个抽象产品类(只能创建一个具体产品类的实例)</li>
+</ul>
+<h2 id="抽象工厂模式："><a href="#抽象工厂模式：" class="headerlink" title="抽象工厂模式："></a>抽象工厂模式：</h2><ul>
+<li>多个抽象产品类，每个抽象产品类可以派生出多个具体产品类。</li>
+<li>一个抽象工厂类，可以派生出多个具体工厂类。</li>
+<li>抽象工厂模式有多个产品类(抽象工厂模式可以创建多个)</li>
+</ul>
+<h1 id="2-抽象工厂模式举例"><a href="#2-抽象工厂模式举例" class="headerlink" title="2.抽象工厂模式举例"></a>2.抽象工厂模式举例</h1><p>比如说工厂可以生产鼠标和键盘。那么抽象工厂的实现类（它的某个具体子类）的对象都可以生产鼠标和键盘，但可能工厂A生产的是罗技的键盘和鼠标，工厂B是微软的。 这样A和B就是工厂，对应于抽象工厂；每个工厂生产的鼠标和键盘就是产品，对应于工厂方法；用了工厂方法模式，你替换生成键盘的工厂方法，就可以把键盘从罗技换到微软。但是用了抽象工厂模式，你只要换家工厂，就可以同时替换鼠标和键盘一套。如果你要的产品有几十个，当然用抽象工厂模式一次替换全部最方便（这个工厂会替你用相应的工厂方法） 所以说抽象工厂就像工厂，而工厂方法则像是工厂的一种产品生产线</p>
+<h1 id="3-总结"><a href="#3-总结" class="headerlink" title="3.总结"></a>3.总结</h1><ol>
+<li>抽象工厂模式并不是指抽象类(不要混淆)，这里注意区分。</li>
+<li>工厂方法模式更注重的是工厂方法的更改，更细微一点，如替换键盘由微软的生产方法替换到罗技的生产方法。而抽象工厂模式更注重的是工厂的替换，工厂方法的更改是工厂替换后考虑的点。</li>
+<li>工厂方法模式可以看做是生产一个东西，抽象工厂模式看作生产一堆东西，只是对应的厂商不同(实现类)。如果工厂方法模式中Factory生产多个东西就是抽象工厂模式（个人理解）</li>
+</ol>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
     </div>
 </div>
 
@@ -211,7 +212,7 @@
     // We expose some of the variables needed by the front end
     window.hexo_search_path = "search.json"
     window.hexo_root = "/"
-    window.isPost = false
+    window.isPost = true
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="mk-passby的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Spring源码学习——自定义标签 - mk-passby的博客 | mk-passby&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 我想回头望  把故事从头讲~ </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>mk-passby</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-自定义标签步骤"><span class="toc-text">1.自定义标签步骤</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-代码如下"><span class="toc-text">2.代码如下</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-编写pojo"><span class="toc-text">1.编写pojo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-xsd文件描述组件内容"><span class="toc-text">2.xsd文件描述组件内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-创建类，实现BeanDefinitionParser接口"><span class="toc-text">3.创建类，实现BeanDefinitionParser接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-创建handler文件，注册spring容器"><span class="toc-text">4.创建handler文件，注册spring容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-编写spring-handlers和spring-schemas文件，默认在工程的-META-INF-文件下"><span class="toc-text">5.编写spring.handlers和spring.schemas文件，默认在工程的/META-INF/文件下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-测试"><span class="toc-text">6.测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-整个项目结构"><span class="toc-text">3.整个项目结构</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> 我想回头望  把故事从头讲~ </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Spring源码学习——自定义标签
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2017-11-28 11:44:00</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#spring" title="spring">spring</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="1-自定义标签步骤"><a href="#1-自定义标签步骤" class="headerlink" title="1.自定义标签步骤"></a>1.自定义标签步骤</h1><ol>
+<li>创建一个需要扩展的组件</li>
+<li>定义xsd文件描述组件内容</li>
+<li>创建一个文件，实现BeanDefinitionParser接口，解析xsd文件中的定义和组件定义</li>
+<li>创建handler文件，扩展NamespaceHandlerSupport，注册组件到spring容器</li>
+<li>编写spring.handlers和spring.schemas文件</li>
+</ol>
+<h1 id="2-代码如下"><a href="#2-代码如下" class="headerlink" title="2.代码如下"></a>2.代码如下</h1><h2 id="1-编写pojo"><a href="#1-编写pojo" class="headerlink" title="1.编写pojo"></a>1.编写pojo</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> String sex;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"><span class="comment">//省略getter、setter</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-xsd文件描述组件内容"><a href="#2-xsd文件描述组件内容" class="headerlink" title="2.xsd文件描述组件内容"></a>2.xsd文件描述组件内容</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">schema</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2001/XMLSchema"</span> <span class="attr">targetNamespace</span>=<span class="string">"http://www.springtest.com/schema/user"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xmlns:tns</span>=<span class="string">"http://www.springtest.com/schema/user"</span> <span class="attr">elementFormDefault</span>=<span class="string">"qualified"</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 表示数据类型等定义来自w3 --&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--表示文档中要定义的元素来自什么命名空间 --&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--表示此文档的默认命名空间是什么 --&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--表示要求xml文档的每一个元素都要有命名空间指定 --&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">&lt;!-- ……定义主体部分…… --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">element</span> <span class="attr">name</span>=<span class="string">"user"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">complexType</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">attribute</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">type</span>=<span class="string">"string"</span>&gt;</span><span class="tag">&lt;/<span class="name">attribute</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">attribute</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">type</span>=<span class="string">"string"</span>&gt;</span><span class="tag">&lt;/<span class="name">attribute</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">attribute</span> <span class="attr">name</span>=<span class="string">"sex"</span> <span class="attr">type</span>=<span class="string">"string"</span>&gt;</span><span class="tag">&lt;/<span class="name">attribute</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">attribute</span> <span class="attr">name</span>=<span class="string">"age"</span> <span class="attr">type</span>=<span class="string">"int"</span>&gt;</span><span class="tag">&lt;/<span class="name">attribute</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">complexType</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">element</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">schema</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>描述了一个新的targetNamespace，并定义了一个name是user的element，有id，name，sex，age属性</p>
+<h2 id="3-创建类，实现BeanDefinitionParser接口"><a href="#3-创建类，实现BeanDefinitionParser接口" class="headerlink" title="3.创建类，实现BeanDefinitionParser接口"></a>3.创建类，实现BeanDefinitionParser接口</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.customtag;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.support.BeanDefinitionBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StringUtils;</span><br><span class="line"><span class="keyword">import</span> org.w3c.dom.Element;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.model.User;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserBeanDefinitionParser</span> <span class="keyword">extends</span> <span class="title">AbstractSingleBeanDefinitionParser</span> </span>&#123;</span><br><span class="line">	<span class="comment">// Element对应的类</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> Class <span class="title">getBeanClass</span><span class="params">(Element element)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> User.class;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 从element中解析并提取对应的元素</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doParse</span><span class="params">(Element element, BeanDefinitionBuilder bean)</span> </span>&#123;</span><br><span class="line">		String name = element.getAttribute(<span class="string">"name"</span>);</span><br><span class="line">		String sex = element.getAttribute(<span class="string">"sex"</span>);</span><br><span class="line">		String age = element.getAttribute(<span class="string">"age"</span>);</span><br><span class="line">		<span class="comment">// 将提取的数据放入到BeanDefinitionBuilder中，将所有beanbeanFactory中</span></span><br><span class="line">		<span class="keyword">if</span> (StringUtils.hasText(name)) &#123;</span><br><span class="line">			bean.addPropertyValue(<span class="string">"name"</span>, name);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (StringUtils.hasText(sex)) &#123;</span><br><span class="line">			bean.addPropertyValue(<span class="string">"sex"</span>, sex);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (StringUtils.hasText(age)) &#123;</span><br><span class="line">			bean.addPropertyValue(<span class="string">"age"</span>, Integer.parseInt(age));</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-创建handler文件，注册spring容器"><a href="#4-创建handler文件，注册spring容器" class="headerlink" title="4.创建handler文件，注册spring容器"></a>4.创建handler文件，注册spring容器</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.customtag;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.xml.NamespaceHandlerSupport;</span><br><span class="line"></span><br><span class="line"><span class="comment">/******创建handler文件，组件注册到spring容器***/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyNamespaceHandler</span> <span class="keyword">extends</span> <span class="title">NamespaceHandlerSupport</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		registerBeanDefinitionParser(<span class="string">"user"</span>, <span class="keyword">new</span> UserBeanDefinitionParser());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-编写spring-handlers和spring-schemas文件，默认在工程的-META-INF-文件下"><a href="#5-编写spring-handlers和spring-schemas文件，默认在工程的-META-INF-文件下" class="headerlink" title="5.编写spring.handlers和spring.schemas文件，默认在工程的/META-INF/文件下"></a>5.编写spring.handlers和spring.schemas文件，默认在工程的/META-INF/文件下</h2><p>spring.handlers</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http\://www.springtest.com/schema/user=test.customtag.MyNamespaceHandler</span><br></pre></td></tr></table></figure>
+<p>spring.schemas</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http\://www.springtest.com/schema/user.xsd=META-INF/Spring-test.xsd</span><br></pre></td></tr></table></figure>
+<p>此处注意：</p>
+<p>这里因为我创建的是java项目，直接在项目下建造META-INF会提示找不到对应的文件，所以这里是将文件打包成jar包导入到项目中。如下图所示</p>
+<p><img src="https://static.oschina.net/uploads/space/2017/1128/113739_vNLU_3429289.png" alt=""><img src="https://static.oschina.net/uploads/space/2017/1128/113750_HHla_3429289.png" alt=""></p>
+<h2 id="6-测试"><a href="#6-测试" class="headerlink" title="6.测试"></a>6.测试</h2><p>导入自定义标签</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> </span></span><br><span class="line"><span class="tag">	<span class="attr">xmlns:myname</span>=<span class="string">"http://www.springtest.com/schema/user"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans  </span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd  </span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springtest.com/schema/user</span></span></span><br><span class="line"><span class="tag"><span class="string">       	http://www.springtest.com/schema/user.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        "</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">myname:user</span> <span class="attr">id</span>=<span class="string">"testBean"</span> <span class="attr">name</span>=<span class="string">"aaaaaa"</span> <span class="attr">sex</span>=<span class="string">"dsaf"</span> <span class="attr">age</span>=<span class="string">"12"</span>&gt;</span><span class="tag">&lt;/<span class="name">myname:user</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>测试代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="comment">/****测试输出*/</span></span><br><span class="line">	<span class="meta">@org</span>.junit.Test</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"--------"</span>);</span><br><span class="line">		ApplicationContext act=<span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext-service.xml"</span>);</span><br><span class="line">		User u=(User) act.getBean(<span class="string">"testBean"</span>);</span><br><span class="line">		System.out.println(<span class="string">"--------------"</span>+u.toString());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<p><img src="https://static.oschina.net/uploads/space/2017/1128/113515_sKwH_3429289.png" alt=""></p>
+<h1 id="3-整个项目结构"><a href="#3-整个项目结构" class="headerlink" title="3.整个项目结构"></a>3.整个项目结构</h1><p><img src="https://static.oschina.net/uploads/space/2017/1128/113903_VcT2_3429289.png" alt=""></p>
+<p>参考自：spring源码深度解析</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/mk-passby">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+
+
+</html>
