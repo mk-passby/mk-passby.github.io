@@ -157,10 +157,11 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        UserDao userDaoProxy=<span class="keyword">new</span> StaticProxy(<span class="keyword">new</span> UserDaoImpl());</span><br><span class="line">        userDaoProxy.delUser();</span><br><span class="line">        userDaoProxy.updateUser();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>结果如下</p>
 <p><img src="https://oscimg.oschina.net/oscnet/74ef4bc2fa4aeddd50228ddef4720eb43d2.jpg" alt=""></p>
-<h2 id="2-2由静态代理类引出动态代理类"><a href="#2-2由静态代理类引出动态代理类" class="headerlink" title="2.2由静态代理类引出动态代理类"></a>2.2由静态代理类引出动态代理类</h2><pre><code>可以看见，我们的静态代理类也实现了UserDao接口，当接口新增内容时，如新增一个query()方法，此时，我们的UserDaoImpl和StaticProxy类都要改变。
-
-这是我们不想看见的，我们希望代理类可以不做修改，只需要修改我们的实现类的内容。由此引出了动态代理类(由此动态代理类的作用也显而易见)
-</code></pre><h2 id="2-3动态代理类"><a href="#2-3动态代理类" class="headerlink" title="2.3动态代理类"></a>2.3动态代理类</h2><p><strong>定义动态代理工具类</strong></p>
+<h2 id="2-2由静态代理类引出动态代理类"><a href="#2-2由静态代理类引出动态代理类" class="headerlink" title="2.2由静态代理类引出动态代理类"></a>2.2由静态代理类引出动态代理类</h2><ul>
+<li>可以看见，我们的静态代理类也实现了UserDao接口，当接口新增内容时，如新增一个query()方法，此时，我们的UserDaoImpl和StaticProxy类都要改变。-</li>
+<li>这是我们不想看见的，我们希望代理类可以不做修改，只需要修改我们的实现类的内容。由此引出了动态代理类(由此动态代理类的作用也显而易见) </li>
+</ul>
+<h2 id="2-3动态代理类"><a href="#2-3动态代理类" class="headerlink" title="2.3动态代理类"></a>2.3动态代理类</h2><p><strong>定义动态代理工具类</strong></p>
 <p>返回指定的接口，将方法调用指定的调用处理程序的代理类的一个实例<img src="https://oscimg.oschina.net/oscnet/df20059e0773fb21aff63aadab22372be0c.jpg" alt=""></p>
 <p>三个参数可以查阅JDK明细，主要需要实现<code>InvocationHandler</code>接口，实现<code>invoke</code>方法，通过反射实现对抽象接口方法的调用<code>method.invoke(target, args),</code>调其中target就是我们真正的实现类</p>
 <p><img src="https://oscimg.oschina.net/oscnet/deabed76893053d4622f0b84e8c2c756a9f.jpg" alt=""></p>
