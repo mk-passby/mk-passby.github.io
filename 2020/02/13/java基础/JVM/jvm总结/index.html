@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="mk-passby的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        jvm总结 - mk-passby的博客 | mk-passby&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 我想回头望  把故事从头讲~ </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>mk-passby</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> 我想回头望  把故事从头讲~ </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        jvm总结
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-02-13 16:40:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#jvm" title="jvm">jvm</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p><strong>1.JVM运行时数据区</strong></p>
+<p><img src="/2020/02/13/java基础/JVM/jvm总结/1.png" alt="img"></p>
+<p>JVM运行时数据区由以下组成：</p>
+<p>程序计数器：指向当前线程正在执行的字节码指令的地址行号等。（记录程序运行到哪里了）</p>
+<p>虚拟机栈：当前线程运行方法所需要的数据指令，返回地址</p>
+<p>本地方法栈：native方法使用的栈帧</p>
+<p>方法区：类信息，常量，静态变量等</p>
+<p>Heap：堆内存（存放对象实例）</p>
+<p><strong>2.java内存模型</strong></p>
+<p><img src="/2020/02/13/java基础/JVM/jvm总结/2.png" alt="img"></p>
+<p>由于对象的生命周期不一样，出现了分代，98%的对象在minorGC的时候会被回收掉</p>
+<p>结合图一可以看到，新生代和老年代是分配在堆内存中，而1.8以前的永久代是分配在方法区，1.8以后的元空间(meta space)是一个独立的内存。</p>
+<p><strong>为什么8：1：1</strong></p>
+<p>此处新生代的空间分配为8:1:1,主要由于新生代生命周期导致。如果只有两块如9：1，当s1中放入数据，那么下次GC将没有地方存放s1中的对象，将会直接进入老年代，将导致该对象很难回收</p>
+<p>注意 ，元空间相当于是动态扩容，只要内存够用</p>
+<p><strong>jvm参数配置</strong></p>
+<p>VM参数</p>
+<p><a href="http://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html</a></p>
+<p>-Xms20M  starting    起始堆内存大小</p>
+<p>-Xmx     max    最大堆内存大小</p>
+<p>-Xmn     new    新生代大小</p>
+<p>对象分配eden</p>
+<p>-XX:SurvivorRatio=8</p>
+<p>8:1:1</p>
+<p>TLAB  Thread Local Allaction Buffer  栈上分配</p>
+<p>对象很大</p>
+<p>​    -XX:PretenureSizeThreshold=3145728   3M</p>
+<p>长期存活的对象 </p>
+<p>​    -XX:MaxTenuringThreshold=15</p>
+<p>动态对象年龄判定</p>
+<p>​    相同年龄所有对象的大小总和 &gt; Survivor空间的一半</p>
+<p>​    </p>
+<p>分配担保</p>
+<p> Minor GC 之前检查 </p>
+<p> 老年代最大可用连续空间是否&gt;新生代所有对象总空间</p>
+<p>​    </p>
+<p>Minor GC        新生代垃圾回收</p>
+<p>Major GC        old区垃圾回收</p>
+<p>Full  GC        minor+major</p>
+<p>JVM调优最终目的减小垃圾回收</p>
+<p><strong>3.垃圾回收算法</strong></p>
+<p>引用</p>
+<p>​    强  Object object = new Object();</p>
+<p>​    软  SoftReference引用的对象</p>
+<p>​    弱  WeakReference引用的对象</p>
+<p>​    虚  PhantomReference引用的对象</p>
+<p>​    </p>
+<p>回收</p>
+<p>​    方法论</p>
+<p>​        标记-清除算法</p>
+<p>​        复制回收算法</p>
+<p>​        标记-整理算法</p>
+<p><img src="/2020/02/13/java基础/JVM/jvm总结/3.png" alt="img"></p>
+<p>​    垃圾收集器</p>
+<p>​        STW  Stop The World</p>
+<p>​        Serial</p>
+<p>​        ParNew </p>
+<p>​            -XX:ParallelGCThreads</p>
+<p>​        Parallel Scavenge （全局）</p>
+<p>​            吞吐量 = 运行用户代码时间 / （运行用户代码时间  + 垃圾收集时间）</p>
+<p>​            -XX:MaxGCPauseMillis=n</p>
+<p>​            -XX:GCTimeRatio=n</p>
+<p>​            -XX:UseAdaptiveSizePolicy   GC  Ergonomics</p>
+<p>​        Serial Old</p>
+<p>​            CMS备用预案  Concurrent Mode Failusre时使用</p>
+<p>​            标记-整理算法</p>
+<p>​        Parallel Old</p>
+<p>​            标记-整理算法</p>
+<p>​        CMS</p>
+<p>​            标记-清除算法</p>
+<p>​            减少回收停顿时间</p>
+<p>​            碎片 -XX:CMSInitiatingOccupancyFraction  </p>
+<p>​            Concurrent Mode Failure 启用Serial Old</p>
+<p>​            </p>
+<p>​            -XX:+UseCMSCompactAtFullCollection</p>
+<p>​            -XX:CMSFullGCsBeforeCompaction 执行多少次不压缩FullGC后 来一次带压缩的 0 表示每次都压</p>
+<p>​            -XX:+UseConcMarkSweep</p>
+<p>​        G1</p>
+<p><img src="/2020/02/13/java基础/JVM/jvm总结/4.png" alt="img"></p>
+<p>​        </p>
+<p>​    注：新生代均用复制回收算法</p>
+<p><strong>4.GC定位</strong></p>
+<p>如何查看当前的垃圾回收器</p>
+<p>​    -XX:+PrintFlagsFinal</p>
+<p>​    -XX:+PrintCommandLineFlags</p>
+<p><img src="/2020/02/13/java基础/JVM/jvm总结/5.jpg" alt="img"></p>
+<p>​    server client</p>
+<p>​    MBean</p>
+<p>GC日志</p>
+<p>​    1.输出日志</p>
+<p>​    -XX:+PrintGCTimeStamps </p>
+<p>​    -XX:+PrintGCDetails </p>
+<p>​    -Xloggc:/home/administrator/james/gc.log</p>
+<p>​    -XX:+PrintHeapAtGC</p>
+<p>​    2.日志文件控制</p>
+<p>​    -XX:-UseGCLogFileRotation</p>
+<p>​    -XX:GCLogFileSize=8K</p>
+<p>​    3.怎么看</p>
+<p>​    </p>
+<p>JDK自带的 监控工具</p>
+<p><a href="https://docs.oracle.com/javase/8/docs/technotes/tools/windows/toc.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/8/docs/technotes/tools/windows/toc.html</a></p>
+<p>​    jmap -heap pid 堆使用情况</p>
+<p>​    jstat  -gcutil pid 1000</p>
+<p>​    jstack  线程dump </p>
+<p>​    jvisualvm</p>
+<p>​    jconsole</p>
+<p>​    </p>
+<p>MAT</p>
+<p>​    <a href="http://help.eclipse.org/oxygen/index.jsp?topic=/org.eclipse.mat.ui.help/welcome.html" target="_blank" rel="noopener">http://help.eclipse.org/oxygen/index.jsp?topic=/org.eclipse.mat.ui.help/welcome.html</a></p>
+<p>​    -XX:+HeapDumpOnOutOfMemoryError </p>
+<p>​    -XX:HeapDumpPath=/home/administrator/james/error.hprof</p>
+<p>怀疑：</p>
+<p>​    1.看GC日志  126719K-&gt;126719K(126720K)</p>
+<p>​    2.dump</p>
+<p>​    3.MAT</p>
+<p>​        1.占用Retained Heap</p>
+<p>​        2.看有没有GC Root指向</p>
+<p>​    </p>
+<p>什么条件触发STW的Full GC呢？</p>
+<p>Perm空间不足；</p>
+<p>CMS GC时出现promotion failed和concurrent mode failure（concurrent mode failure发生的原因一般是CMS正在进行，但是由于老年代空间不足，需要尽快回收老年代里面的不再被使用的对象，这时停止所有的线程，同时终止CMS，直接进行Serial Old GC）；</p>
+<p>（promontion faild产生的原因是EDEN空间不足的情况下将EDEN与From survivor中的存活对象存入To survivor区时,To survivor区的空间不足，再次晋升到old gen区，而old gen区内存也不够的情况下产生了promontion faild从而导致full gc    ）</p>
+<p>统计得到的Young GC晋升到老年代的平均大小大于老年代的剩余空间；</p>
+<p>主动触发Full GC（执行jmap -histo:live [pid]）来避免碎片问题。</p>
+<p>​    </p>
+<p>​    </p>
+<p>java -Xms8m -Xmx64m -verbose:gc -Xloggc:/home/administrator/james/gc.log  -XX:+PrintHeapAtGC -XX:+PrintGCApplicationStoppedTime -XX:+PrintGCTimeStamps -XX:+PrintCommandLineFlags -XX:+PrintFlagsFinal -XX:+PrintGCDetails -XX:+UseConcMarkSweepGC -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=9004 -Djava.rmi.server.hostname=177.1.1.122 -jar jvm-demo1-0.0.1-SNAPSHOT.jar  &gt; catalina.out  2&gt;&amp;1 &amp;</p>
+<p>java -Xms128m -Xmx128m -verbose:gc -Xloggc:/home/administrator/james/gc.log  -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/home/administrator/james/error.hprof -XX:+PrintGCApplicationStoppedTime -XX:+PrintGCTimeStamps -XX:+PrintCommandLineFlags -XX:+PrintFlagsFinal -XX:+PrintGCDetails -XX:+UseConcMarkSweepGC  -XX:+UseCMSCompactAtFullCollection -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=9004 -Djava.rmi.server.hostname=177.1.1.122 -jar jvm-demo1-0.0.1-SNAPSHOT.jar  &gt; catalina.out  2&gt;&amp;1 &amp;</p>
+<p>java -Xms128m -Xmx128m -verbose:gc -Xloggc:/home/administrator/james/gc.log  -XX:+HeapDumpOnOutOfMemoryError -XX:+PrintHeapAtGC -XX:HeapDumpPath=/home/administrator/james/error.hprof -XX:+PrintGCApplicationStoppedTime -XX:+PrintGCTimeStamps -XX:+PrintCommandLineFlags -XX:+PrintFlagsFinal -XX:+PrintGCDetails -XX:+UseCMSCompactAtFullCollection -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=9004 -Djava.rmi.server.hostname=177.1.1.122 -jar jvm-demo1-0.0.1-SNAPSHOT.jar  &gt; catalina.out  2&gt;&amp;1 &amp;</p>
+<p>-XX:+CMSScavengeBeforeRemark</p>
+<p>​    </p>
+<p>​    </p>
+<p>​        </p>
+<p><img src="/2020/02/13/java基础/JVM/jvm总结/6.jpg" alt="img"></p>
+<p><img src="/2020/02/13/java基础/JVM/jvm总结/7.jpg" alt="img"></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/mk-passby">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+
+
+</html>
