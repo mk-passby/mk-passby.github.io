@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="mk-passby的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        常见算法排序 - mk-passby的博客 | mk-passby&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 我想回头望  把故事从头讲~ </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>mk-passby</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、插入排序"><span class="toc-text">一、插入排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#个人简介"><span class="toc-text">个人简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#二、希尔-Shell-排序"><span class="toc-text">二、希尔(Shell )排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、选择排序"><span class="toc-text">三、选择排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、堆排序"><span class="toc-text">四、堆排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、冒泡排序"><span class="toc-text">五、冒泡排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、快速排序"><span class="toc-text">六、快速排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、归并排序"><span class="toc-text">七、归并排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八、计数排序"><span class="toc-text">八、计数排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#九、桶排序"><span class="toc-text">九、桶排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十、基数排序"><span class="toc-text">十、基数排序</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> 我想回头望  把故事从头讲~ </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        常见算法排序
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-03-29 20:44:00</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#算法" title="算法">算法</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>[TOC]</p>
+<h1 id="一、插入排序"><a href="#一、插入排序" class="headerlink" title="一、插入排序"></a>一、插入排序</h1><p><strong>思路</strong></p>
+<p>对于未排序的数据，从第1位从后往前扫描，取出元素，和前面的元素对比，若当前元素小于前一元素，则将前一元素后移，当前元素继续与前两个位置的元素比较，直到找出大于或等于的元素位置，将该元素插入到对应位置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] insertSort(<span class="keyword">int</span>[] a) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = a[i];</span><br><span class="line">            <span class="keyword">int</span> tempIndex = i;</span><br><span class="line">            <span class="keyword">while</span> (tempIndex &gt; <span class="number">0</span> &amp;&amp; temp &lt; a[tempIndex-<span class="number">1</span>]) &#123;</span><br><span class="line">                a[tempIndex] = a[tempIndex-<span class="number">1</span>];</span><br><span class="line">                tempIndex--;</span><br><span class="line">            &#125;</span><br><span class="line">            a[tempIndex] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/29/算法/常见算法排序/插入排序.gif" alt="插入排序"></p>
+<h1 id="个人简介"><a href="#个人简介" class="headerlink" title="个人简介"></a>个人简介</h1><h2 id="二、希尔-Shell-排序"><a href="#二、希尔-Shell-排序" class="headerlink" title="二、希尔(Shell )排序"></a>二、希尔(Shell )排序</h2><p><strong>思路</strong></p>
+<p>将整个待排序序列分成若干个子序列分别进行直接插入排序</p>
+<ul>
+<li>选择一个增量Tn，其中Tn&gt;1</li>
+<li>按增量序列数n，对序列进行n趟排序</li>
+<li>每趟排序，根据对应的增量ti，将待排序列分割成若干长度为m的子序列，分别对各子表进行直接插入排序。仅增量因子为1时，整个序列作为一个表来处理，表长度即为整个序列的长度。</li>
+</ul>
+<p><strong>代码</strong></p>
+<p><s>待补充</s></p>
+<p><strong>动图</strong></p>
+<p> <img src="/2020/03/29/算法/常见算法排序/希尔排序.gif" alt="希尔排序"></p>
+<h2 id="三、选择排序"><a href="#三、选择排序" class="headerlink" title="三、选择排序"></a>三、选择排序</h2><p><strong>思路：</strong></p>
+<p>全部遍历找到最小值与第0个元素交换，再从第一个位置开始往后找到最小的，与第1个元素交换，再从第二个位置开始往后找到最小的与第2个元素交换，直到选到最后一个元素</p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] selectedSort(<span class="keyword">int</span>[] a) &#123;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">           <span class="keyword">int</span> minIndex = i;</span><br><span class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; a.length; j++) &#123;</span><br><span class="line">               <span class="keyword">if</span> (a[minIndex] &gt; a[j]) &#123;</span><br><span class="line">                   minIndex = j;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">int</span> temp = a[i];</span><br><span class="line">           a[i] = a[minIndex];</span><br><span class="line">           a[minIndex] = temp;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> a;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>动图</strong></p>
+<p><img src="/2020/03/29/算法/常见算法排序/选择排序.gif" alt="快速排序"></p>
+<h2 id="四、堆排序"><a href="#四、堆排序" class="headerlink" title="四、堆排序"></a>四、堆排序</h2><p><strong>动图</strong></p>
+<p><img src="/2020/03/29/算法/常见算法排序/堆排序.gif" alt="快速排序"></p>
+<h2 id="五、冒泡排序"><a href="#五、冒泡排序" class="headerlink" title="五、冒泡排序"></a>五、冒泡排序</h2><p><strong>思路</strong></p>
+<p><strong>动图</strong></p>
+<p><img src="/2020/03/29/算法/常见算法排序/冒泡排序.gif" alt="快速排序"></p>
+<h2 id="六、快速排序"><a href="#六、快速排序" class="headerlink" title="六、快速排序"></a>六、快速排序</h2><p><strong>动图</strong></p>
+<p><img src="/2020/03/29/算法/常见算法排序/快速排序.gif" alt="快速排序"></p>
+<h2 id="七、归并排序"><a href="#七、归并排序" class="headerlink" title="七、归并排序"></a>七、归并排序</h2><p><strong>动图</strong></p>
+<p><img src="/2020/03/29/算法/常见算法排序/归并排序.gif" alt="快速排序"></p>
+<h2 id="八、计数排序"><a href="#八、计数排序" class="headerlink" title="八、计数排序"></a>八、计数排序</h2><p><strong>动图</strong></p>
+<p><img src="/2020/03/29/算法/常见算法排序/计数排序.gif" alt="快速排序"></p>
+<h2 id="九、桶排序"><a href="#九、桶排序" class="headerlink" title="九、桶排序"></a>九、桶排序</h2><p><strong>动图</strong></p>
+<p><img src="/2020/03/29/算法/常见算法排序/桶排序.png" alt="快速排序"></p>
+<h2 id="十、基数排序"><a href="#十、基数排序" class="headerlink" title="十、基数排序"></a>十、基数排序</h2><p><strong>动图</strong></p>
+<p><img src="/2020/03/29/算法/常见算法排序/基数排序.gif" alt="快速排序"></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/mk-passby">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+
+
+</html>
