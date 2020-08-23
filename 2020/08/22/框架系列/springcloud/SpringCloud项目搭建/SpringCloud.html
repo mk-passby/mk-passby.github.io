@@ -1,0 +1,1927 @@
+<h1 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud:"></a>SpringCloud:</h1><h2 id="0-SpringCloud升级-部分组件停用"><a href="#0-SpringCloud升级-部分组件停用" class="headerlink" title="0,SpringCloud升级,部分组件停用:"></a>0,SpringCloud升级,部分组件停用:</h2><p>1,Eureka停用,可以使用zk作为服务注册中心</p>
+<p>2,服务调用,Ribbon准备停更,代替为LoadBalance</p>
+<p>3,Feign改为OpenFeign</p>
+<p>4,Hystrix停更,改为resilence4j</p>
+<p>​        或者阿里巴巴的sentienl</p>
+<p>5.Zuul改为gateway</p>
+<p>6,服务配置Config改为  Nacos</p>
+<p>7,服务总线Bus改为Nacos</p>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建:"></a>环境搭建:</h1><h2 id="1-创建父工程-pom依赖"><a href="#1-创建父工程-pom依赖" class="headerlink" title="1,创建父工程,pom依赖"></a>1,创建父工程,pom依赖</h2><pre><code class="java">代码...
+</code></pre>
+<h2 id="2-创建子模块-pay模块"><a href="#2-创建子模块-pay模块" class="headerlink" title="2,创建子模块,pay模块"></a>2,创建子模块,pay模块</h2><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sc的3.png" alt=""></p>
+<h3 id="1-子模块名字"><a href="#1-子模块名字" class="headerlink" title="1,子模块名字:"></a>1,子模块名字:</h3><p>​        cloud_pay_8001</p>
+<h3 id="2-pom依赖"><a href="#2-pom依赖" class="headerlink" title="2,pom依赖"></a>2,pom依赖</h3><h3 id="3-创建application-yml"><a href="#3-创建application-yml" class="headerlink" title="3,创建application.yml"></a>3,创建application.yml</h3><pre><code class="yml"><span class="attr">server:</span>
+<span class="attr">    port:</span> <span class="number">8001</span>   
+<span class="attr">spring:</span>
+<span class="attr">    application:</span>
+<span class="attr">        name:</span> <span class="string">cloud-payment-service</span>
+<span class="attr">    datasource:</span>
+    <span class="comment"># 当前数据源操作类型</span>
+<span class="attr">    type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span>
+    <span class="comment"># mysql驱动类</span>
+<span class="attr">    driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span>
+<span class="attr">      url:</span> <span class="attr">jdbc:mysql://localhost:3306/db2019?useUnicode=true&amp;characterEncoding=</span>
+            <span class="string">UTF-8&amp;useSSL=false&amp;serverTimezone=GMT%2B8</span>                                
+<span class="attr">    username:</span> <span class="string">root</span>
+<span class="attr">    password:</span> <span class="string">root</span>
+<span class="attr">mybatis:</span>            
+<span class="attr">    mapper-locations:</span> <span class="string">classpath*:mapper/*.xml</span>
+<span class="attr">       type-aliases-package:</span> <span class="string">com.eiletxie.springcloud.entities</span>
+               <span class="string">它一般对应我们的实体类所在的包，这个时候会自动取对应包中不包括包名的简单类名作为包括包名的别名。多个package之间可以用逗号或者分号等来进行分隔（value的值一定要是包的全）</span>
+</code></pre>
+<h3 id="4-主启动类"><a href="#4-主启动类" class="headerlink" title="4,主启动类"></a>4,主启动类</h3><p>​        ….</p>
+<h3 id="5-业务类"><a href="#5-业务类" class="headerlink" title="5,业务类"></a>5,业务类</h3><h4 id="1-sql"><a href="#1-sql" class="headerlink" title="1,sql"></a>1,sql</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sc的4.png" alt=""></p>
+<h4 id="2-实体类"><a href="#2-实体类" class="headerlink" title="2,实体类"></a>2,实体类</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sc的5.png" alt=""></p>
+<h4 id="3-entity类"><a href="#3-entity类" class="headerlink" title="3,.entity类"></a>3,.entity类</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sc的6.png" alt=""></p>
+<h4 id="4-dao层"><a href="#4-dao层" class="headerlink" title="4,dao层:"></a>4,dao层:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sc的7.png" alt=""></p>
+<h4 id="5-mapper配置文件类"><a href="#5-mapper配置文件类" class="headerlink" title="5,mapper配置文件类"></a>5,mapper配置文件类</h4><p>​                <strong>在resource下,创建mapper/PayMapper.xml</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sc的8.png" alt=""></p>
+<h4 id="6-写service和serviceImpl"><a href="#6-写service和serviceImpl" class="headerlink" title="6,写service和serviceImpl"></a>6,写service和serviceImpl</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sc的9.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sc的10.png" alt="sc的9"></p>
+<h4 id="7-controller"><a href="#7-controller" class="headerlink" title="7,controller"></a>7,controller</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sc的11.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sc的12.png" alt=""></p>
+<h2 id="3-热部署"><a href="#3-热部署" class="headerlink" title="3,热部署:"></a>3,热部署:</h2><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sc的13.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sc的14.png" alt=""></p>
+<p>…..</p>
+<p>…..</p>
+<p>….</p>
+<h2 id="4-order模块"><a href="#4-order模块" class="headerlink" title="4,order模块"></a>4,order模块</h2><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sc的3.png" alt=""></p>
+<h3 id="1-pom"><a href="#1-pom" class="headerlink" title="1,pom"></a><strong>1,pom</strong></h3><h3 id="2-yml配置文件"><a href="#2-yml配置文件" class="headerlink" title="2,yml配置文件"></a><strong>2,yml配置文件</strong></h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\order模块1.png" alt=""></p>
+<h3 id="3-主启动类"><a href="#3-主启动类" class="headerlink" title="3,主启动类"></a><strong>3,主启动类</strong></h3><h3 id="4-复制pay模块的实体类-entity类"><a href="#4-复制pay模块的实体类-entity类" class="headerlink" title="4.复制pay模块的实体类,entity类"></a><strong>4.复制pay模块的实体类,entity类</strong></h3><h3 id="5-写controller类"><a href="#5-写controller类" class="headerlink" title="5,写controller类"></a><strong>5,写controller类</strong></h3><p>​        因为这里是消费者类,主要是消费,那么就没有service和dao,需要调用pay模块的方法</p>
+<p>​        并且这里还没有微服务的远程调用,那么如果要调用另外一个模块,则需要使用基本的api调用</p>
+<p>使用RestTemplate调用pay模块,</p>
+<p>​    <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\order模块2.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\order模块3.png" alt=""></p>
+<p>​    将restTemplate注入到容器</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\order模块4.png" alt=""></p>
+<p>编写controller:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\order模块5.png" alt=""></p>
+<h2 id="5-重构"><a href="#5-重构" class="headerlink" title="5,重构,"></a>5,重构,</h2><p>新建一个模块,将重复代码抽取到一个公共模块中</p>
+<h3 id="1-创建commons模块"><a href="#1-创建commons模块" class="headerlink" title="1,创建commons模块"></a>1,创建commons模块</h3><h3 id="2-抽取公共pom"><a href="#2-抽取公共pom" class="headerlink" title="2,抽取公共pom"></a>2,抽取公共pom</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\commons模块.png" alt=""></p>
+<h3 id="3-entity和实体类放入commons中"><a href="#3-entity和实体类放入commons中" class="headerlink" title="3,entity和实体类放入commons中"></a>3,entity和实体类放入commons中</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\commons模块2.png" alt=""></p>
+<h3 id="4-使用mavne-将commone模块打包-install"><a href="#4-使用mavne-将commone模块打包-install" class="headerlink" title="4,使用mavne,将commone模块打包(install),"></a>4,使用mavne,将commone模块打包(install),</h3><p>​        其他模块引入commons</p>
+<h1 id="2-服务注册与发现"><a href="#2-服务注册与发现" class="headerlink" title="2,服务注册与发现"></a>2,服务注册与发现</h1><h2 id="6-Eureka"><a href="#6-Eureka" class="headerlink" title="6,Eureka:"></a>6,Eureka:</h2><p>前面我们没有服务注册中心,也可以服务间调用,为什么还要服务注册?</p>
+<p>当服务很多时,单靠代码手动管理是很麻烦的,需要一个公共组件,统一管理多服务,包括服务是否正常运行,等</p>
+<p>Eureka用于<strong>==服务注册==</strong>,目前官网<strong>已经停止更新</strong></p>
+<p>​    <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的1.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的2.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的3.png" alt=""></p>
+<p> <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的4.png" alt=""></p>
+<h3 id="单机版eureka"><a href="#单机版eureka" class="headerlink" title="单机版eureka:"></a><strong>单机版eureka:</strong></h3><h4 id="1-创建项目cloud-eureka-server-7001"><a href="#1-创建项目cloud-eureka-server-7001" class="headerlink" title="1,创建项目cloud_eureka_server_7001"></a><strong>1,创建项目cloud_eureka_server_7001</strong></h4><h4 id="2-引入pom依赖"><a href="#2-引入pom依赖" class="headerlink" title="2,引入pom依赖"></a><strong>2,引入pom依赖</strong></h4><p>​        eurka最新的依赖变了</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的5.png" alt=""></p>
+<h4 id="3-配置文件"><a href="#3-配置文件" class="headerlink" title="3,配置文件:"></a>3,配置文件:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的6.png" alt=""></p>
+<h4 id="4-主启动类-1"><a href="#4-主启动类-1" class="headerlink" title="4,主启动类"></a>4,主启动类</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的7.png" alt=""></p>
+<h4 id="5-此时就可以启动当前项目了"><a href="#5-此时就可以启动当前项目了" class="headerlink" title="5,此时就可以启动当前项目了"></a><strong>5,此时就可以启动当前项目了</strong></h4><h4 id="6-其他服务注册到eureka"><a href="#6-其他服务注册到eureka" class="headerlink" title="6,其他服务注册到eureka:"></a><strong>6,其他服务注册到eureka:</strong></h4><p>比如此时pay模块加入eureka:</p>
+<h5 id="1-主启动类上-加注解-表示当前是eureka客户端"><a href="#1-主启动类上-加注解-表示当前是eureka客户端" class="headerlink" title="1.主启动类上,加注解,表示当前是eureka客户端"></a>1.主启动类上,加注解,表示当前是eureka客户端</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的10.png" alt=""></p>
+<h5 id="2-修改pom-引入"><a href="#2-修改pom-引入" class="headerlink" title="2,修改pom,引入"></a>2,修改pom,引入</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的8.png" alt=""></p>
+<h5 id="3-修改配置文件"><a href="#3-修改配置文件" class="headerlink" title="3,修改配置文件:"></a>3,修改配置文件:</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的9.png" alt=""></p>
+<h5 id="4-pay模块重启-就可以注册到eureka中了"><a href="#4-pay模块重启-就可以注册到eureka中了" class="headerlink" title="4,pay模块重启,就可以注册到eureka中了"></a>4,pay模块重启,就可以注册到eureka中了</h5><p><strong>==order模块的注册是一样的==</strong></p>
+<h3 id="集群版eureka"><a href="#集群版eureka" class="headerlink" title="集群版eureka:"></a>集群版eureka:</h3><h4 id="集群原理"><a href="#集群原理" class="headerlink" title="集群原理:"></a>集群原理:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的11.png" alt=""></p>
+<pre><code class="java"><span class="number">1</span>,就是pay模块启动时,注册自己,并且自身信息也放入eureka
+<span class="number">2</span>.order模块,首先也注册自己,放入信息,当要调用pay时,先从eureka拿到pay的调用地址
+<span class="number">3</span>.通过HttpClient调用
+     并且还会缓存一份到本地,每<span class="number">30</span>秒更新一次
+</code></pre>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的12.png" alt=""></p>
+<p><strong>集群构建原理:</strong></p>
+<p>​        互相注册</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的13.png" alt=""></p>
+<h4 id="构建新erueka项目"><a href="#构建新erueka项目" class="headerlink" title="构建新erueka项目"></a><strong>构建新erueka项目</strong></h4><p>名字:cloud_eureka_server_7002</p>
+<h5 id="1-pom文件"><a href="#1-pom文件" class="headerlink" title="1,pom文件:"></a>1,pom文件:</h5><p>​        粘贴7001的即可</p>
+<h5 id="2-配置文件"><a href="#2-配置文件" class="headerlink" title="2,配置文件:"></a>2,配置文件:</h5><p>​        在写配置文件前,修改一下主机的hosts文件</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的14.png" alt=""></p>
+<p>首先修改之前的7001的eureka项目,因为多个eureka需要互相注册</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的15.png" alt=""></p>
+<p>然后修改7002</p>
+<p>​            <strong>7002也是一样的,只不过端口和地址改一下</strong></p>
+<h5 id="3-主启动类-1"><a href="#3-主启动类-1" class="headerlink" title="3,主启动类:"></a>3,主启动类:</h5><p>​        复制7001的即可</p>
+<h5 id="4-然后启动7001-7002即可"><a href="#4-然后启动7001-7002即可" class="headerlink" title="4,然后启动7001,7002即可"></a>4,然后启动7001,7002即可</h5><p><em><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的16.png" alt=""></em></p>
+<h4 id="将pay-order模块注册到eureka集群中"><a href="#将pay-order模块注册到eureka集群中" class="headerlink" title="将pay,order模块注册到eureka集群中:"></a>将pay,order模块注册到eureka集群中:</h4><h5 id="1-只需要修改配置文件即可"><a href="#1-只需要修改配置文件即可" class="headerlink" title="1,只需要修改配置文件即可:"></a>1,只需要修改配置文件即可:</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的17.png" alt=""></p>
+<h5 id="2-两个模块都修改上面的都一样即可"><a href="#2-两个模块都修改上面的都一样即可" class="headerlink" title="2,两个模块都修改上面的都一样即可"></a>2,两个模块都修改上面的都一样即可</h5><p>​            然后启动两个模块</p>
+<p>​            要先启动7001,7002,然后是pay模块8001,然后是order(80)</p>
+<h3 id="3-将pay模块也配置为集群模式"><a href="#3-将pay模块也配置为集群模式" class="headerlink" title="3,将pay模块也配置为集群模式:"></a>3,将pay模块也配置为集群模式:</h3><h4 id="0-创建新模块-8002"><a href="#0-创建新模块-8002" class="headerlink" title="0,创建新模块,8002"></a>0,创建新模块,8002</h4><p>​    名称: cloud_pay_8002</p>
+<h4 id="1-pom文件-复制8001的"><a href="#1-pom文件-复制8001的" class="headerlink" title="1,pom文件,复制8001的"></a>1,pom文件,复制8001的</h4><h4 id="2-pom文件复制8001的"><a href="#2-pom文件复制8001的" class="headerlink" title="2,pom文件复制8001的"></a>2,pom文件复制8001的</h4><h4 id="3-配置文件复制8001的"><a href="#3-配置文件复制8001的" class="headerlink" title="3,配置文件复制8001的"></a>3,配置文件复制8001的</h4><p>​        端口修改一下,改为8002</p>
+<p>​        服务名称不用改,用一样的</p>
+<h4 id="4-主启动类-复制8001的"><a href="#4-主启动类-复制8001的" class="headerlink" title="4.主启动类,复制8001的"></a>4.主启动类,复制8001的</h4><h4 id="5-mapper-service-controller都复制一份"><a href="#5-mapper-service-controller都复制一份" class="headerlink" title="5,mapper,service,controller都复制一份"></a>5,mapper,service,controller都复制一份</h4><p>​        然后就启动服务即可</p>
+<p>​        此时访问order模块,发现并没有负载均衡到两个pay,模块中,而是只访问8001</p>
+<p>​        虽然我们是使用RestTemplate访问的微服务,但是也可以负载均衡的</p>
+<p>​        <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的18.png" alt=""></p>
+<p><strong>注意这样还不可以,需要让RestTemplate开启负载均衡注解,还可以指定负载均衡算法,默认轮询</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的19.png" alt=""></p>
+<h3 id="4-修改服务主机名和ip在eureka的web上显示"><a href="#4-修改服务主机名和ip在eureka的web上显示" class="headerlink" title="4,修改服务主机名和ip在eureka的web上显示"></a>4,修改服务主机名和ip在eureka的web上显示</h3><p>比如修改pay模块</p>
+<h4 id="1-修改配置文件"><a href="#1-修改配置文件" class="headerlink" title="1,修改配置文件:"></a>1,修改配置文件:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的20.png" alt=""></p>
+<h3 id="5-eureka服务发现"><a href="#5-eureka服务发现" class="headerlink" title="5,eureka服务发现:"></a>5,eureka服务发现:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的21.png" alt=""></p>
+<p>以pay模块为例</p>
+<h4 id="1-首先添加一个注解-在controller中"><a href="#1-首先添加一个注解-在controller中" class="headerlink" title="1,首先添加一个注解,在controller中"></a>1,首先添加一个注解,在controller中</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的22.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的23.png" alt=""></p>
+<h4 id="2-在主启动类上添加一个注解"><a href="#2-在主启动类上添加一个注解" class="headerlink" title="2,在主启动类上添加一个注解"></a>2,在主启动类上添加一个注解</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的24.png" alt=""></p>
+<p><strong>然后重启8001.访问/payment/discover</strong>y</p>
+<h3 id="6-Eureka自我保护"><a href="#6-Eureka自我保护" class="headerlink" title="6,Eureka自我保护:"></a>6,Eureka自我保护:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的26.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的27.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的25.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的28.png" alt=""></p>
+<p><strong>eureka服务端配置:</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的29.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的30.png" alt=""></p>
+<p>​            <strong>设置接受心跳时间间隔</strong></p>
+<p><strong>客户端(比如pay模块):</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Eureka的31.png" alt=""></p>
+<p><strong>此时启动erueka和pay.此时如果直接关闭了pay,那么erueka会直接删除其注册信息</strong></p>
+<h2 id="7-Zookeeper服务注册与发现"><a href="#7-Zookeeper服务注册与发现" class="headerlink" title="7,Zookeeper服务注册与发现:"></a>7,Zookeeper服务注册与发现:</h2><h3 id="1-启动zk-到linux上"><a href="#1-启动zk-到linux上" class="headerlink" title="1,启动zk,到linux上"></a>1,启动zk,到linux上</h3><h3 id="2-创建新的pay模块"><a href="#2-创建新的pay模块" class="headerlink" title="2,创建新的pay模块,"></a>2,创建新的pay模块,</h3><p>单独用于注册到zk中  </p>
+<p>名字 : cloud_pay_8003</p>
+<h4 id="1-pom依赖"><a href="#1-pom依赖" class="headerlink" title="1,pom依赖"></a>1,pom依赖</h4><h4 id="2-配置文件-1"><a href="#2-配置文件-1" class="headerlink" title="2,配置文件"></a>2,配置文件</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\zookeeper的3.png" alt=""></p>
+<h4 id="3-主启动类-2"><a href="#3-主启动类-2" class="headerlink" title="3,主启动类"></a>3,主启动类</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\zookeeper的1.png" alt=""></p>
+<h4 id="4-controller"><a href="#4-controller" class="headerlink" title="4,controller"></a>4,controller</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\zookeeper的2.png" alt=""></p>
+<h4 id="5-然后就可以启动"><a href="#5-然后就可以启动" class="headerlink" title="5,然后就可以启动"></a>5,然后就可以启动</h4><p><strong>此时启动,会报错,因为jar包与我们的zk版本不匹配</strong></p>
+<p>解决:<br>        修改pom文件,改为与我们zk版本匹配的jar包</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\zookeeper的4.png" alt=""></p>
+<p><strong>此时8003就注册到zk中了</strong></p>
+<pre><code class="java">我们在zk上注册的node是临时节点,当我们的服务一定时间内没有发送心跳
+      那么zk就会`将这个服务的node删除了
+</code></pre>
+<p><strong>这里测试,就不写service与dao什么的了</strong></p>
+<h3 id="3-创建order消费模块注册到zk"><a href="#3-创建order消费模块注册到zk" class="headerlink" title="3,创建order消费模块注册到zk"></a>3,创建order消费模块注册到zk</h3><h4 id="1-创建项目"><a href="#1-创建项目" class="headerlink" title="1,创建项目"></a>1,创建项目</h4><p>名字: cloud_order_zk_80</p>
+<h4 id="2-pom"><a href="#2-pom" class="headerlink" title="2,pom"></a>2,pom</h4><h4 id="3-配置文件-1"><a href="#3-配置文件-1" class="headerlink" title="3,配置文件"></a>3,配置文件</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\zookeeper的5.png" alt=""></p>
+<h4 id="4主启动类"><a href="#4主启动类" class="headerlink" title="4主启动类:"></a>4主启动类:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\zookeeper的1.png" alt=""></p>
+<h4 id="5-RestTemolate"><a href="#5-RestTemolate" class="headerlink" title="5,RestTemolate"></a>5,RestTemolate</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\zookeeper的6.png" alt="注意,这里使用RestTemolate,要先注册它"></p>
+<h4 id="6-controller"><a href="#6-controller" class="headerlink" title="6,controller"></a>6,controller</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\zookeeper的7.png" alt=""></p>
+<p><strong>然后启动即可注册到zk</strong></p>
+<h4 id="8-集群版zk注册"><a href="#8-集群版zk注册" class="headerlink" title="8,集群版zk注册:"></a>8,集群版zk注册:</h4><p>只需要修改配置文件:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\zookeeper的5.png" alt=""></p>
+<p>这个connect-string指定多个zk地址即可</p>
+<p>connect-string: 1.2.3.4,2.3.4.5</p>
+<p>#### </p>
+<h2 id="8-Consul"><a href="#8-Consul" class="headerlink" title="8,Consul:"></a>8,Consul:</h2><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\consul的1.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\consul的2.png" alt=""></p>
+<h3 id="1-按照consul"><a href="#1-按照consul" class="headerlink" title="1,按照consul"></a>1,按照consul</h3><p>需要下载一个安装包</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\consul的3.png" alt=""></p>
+<p>启动是一个命令行界面,需要输入consul agen-dev启动</p>
+<h3 id="2-创建新的pay模块-8006"><a href="#2-创建新的pay模块-8006" class="headerlink" title="2,创建新的pay模块,8006"></a>2,创建新的pay模块,8006</h3><h4 id="1-项目名字"><a href="#1-项目名字" class="headerlink" title="1,项目名字"></a>1,项目名字</h4><p>cloud_consule_pay_8006</p>
+<h4 id="2-pom依赖-1"><a href="#2-pom依赖-1" class="headerlink" title="2,pom依赖"></a>2,pom依赖</h4><h4 id="3-配置文件-2"><a href="#3-配置文件-2" class="headerlink" title="3,配置文件"></a>3,配置文件</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\consul的4.png" alt=""></p>
+<h4 id="4-主启动类-2"><a href="#4-主启动类-2" class="headerlink" title="4,主启动类"></a>4,主启动类</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\consul的5.png" alt=""></p>
+<h4 id="5-controller"><a href="#5-controller" class="headerlink" title="5,controller"></a>5,controller</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\consul的6.png" alt=""></p>
+<h4 id="6-启动服务"><a href="#6-启动服务" class="headerlink" title="6,启动服务"></a>6,启动服务</h4><p>#### </p>
+<h3 id="3-创建新order模块"><a href="#3-创建新order模块" class="headerlink" title="3,创建新order模块"></a>3,创建新order模块</h3><p>cloud-consul-order-80</p>
+<h4 id="1-pom文件-1"><a href="#1-pom文件-1" class="headerlink" title="1,pom文件"></a>1,pom文件</h4><h4 id="2-配置文件-2"><a href="#2-配置文件-2" class="headerlink" title="2,配置文件"></a>2,配置文件</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\consul的7.png" alt=""></p>
+<h4 id="3-主启动类-3"><a href="#3-主启动类-3" class="headerlink" title="3,主启动类"></a>3,主启动类</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\consul的5.png" alt=""></p>
+<h4 id="4-RestTemplate注册"><a href="#4-RestTemplate注册" class="headerlink" title="4,RestTemplate注册"></a>4,RestTemplate注册</h4><p>配置类注册</p>
+<h4 id="5-controller-1"><a href="#5-controller-1" class="headerlink" title="5,controller"></a>5,controller</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\consul的8.png" alt=""></p>
+<h4 id="6-启动服务-测试"><a href="#6-启动服务-测试" class="headerlink" title="6,启动服务,测试"></a>6,启动服务,测试</h4><h2 id="9-三个注册中心的异同"><a href="#9-三个注册中心的异同" class="headerlink" title="9,三个注册中心的异同:"></a>9,三个注册中心的异同:</h2><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\consul的9.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\consul的10.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\consul的11.png" alt=""></p>
+<h1 id="3-服务调用"><a href="#3-服务调用" class="headerlink" title="3,服务调用"></a>3,服务调用</h1><h2 id="10-Ribbon负载均衡"><a href="#10-Ribbon负载均衡" class="headerlink" title="10,Ribbon负载均衡:"></a>10,Ribbon负载均衡:</h2><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon.png" alt=""></p>
+<p><strong>Ribbon目前也进入维护,基本上不准备更新了</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的2.png" alt=""></p>
+<p><strong>进程内LB(本地负载均衡)</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的5.png" alt=""></p>
+<p><strong>集中式LB(服务端负载均衡)</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的4.png" alt=""></p>
+<p><strong>区别</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的3.png" alt=""></p>
+<p><strong>Ribbon就是负载均衡+RestTemplate</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的6.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的7.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的8.png" alt=""></p>
+<h3 id="使用Ribbon"><a href="#使用Ribbon" class="headerlink" title="使用Ribbon:"></a>使用Ribbon:</h3><h4 id="1-默认我们使用eureka的新版本时-它默认集成了ribbon"><a href="#1-默认我们使用eureka的新版本时-它默认集成了ribbon" class="headerlink" title="1,默认我们使用eureka的新版本时,它默认集成了ribbon:"></a>1,默认我们使用eureka的新版本时,它默认集成了ribbon:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的9.png" alt=""></p>
+<p><strong>==这个starter中集成了reibbon了==</strong></p>
+<h4 id="2-我们也可以手动引入ribbon"><a href="#2-我们也可以手动引入ribbon" class="headerlink" title="2,我们也可以手动引入ribbon"></a>2,我们也可以手动引入ribbon</h4><p><strong>放到order模块中,因为只有order访问pay时需要负载均衡</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的10.png" alt=""></p>
+<h4 id="3-RestTemplate类"><a href="#3-RestTemplate类" class="headerlink" title="3,RestTemplate类:"></a>3,RestTemplate类:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的11.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的12.png" alt=""></p>
+<pre><code class="java">RestTemplate的:
+        xxxForObject()方法,返回的是响应体中的数据
+    xxxForEntity()方法.返回的是entity对象,这个对象不仅仅包含响应体数据,还包含响应体信息(状态码等)
+</code></pre>
+<h4 id="Ribbon常用负载均衡算法"><a href="#Ribbon常用负载均衡算法" class="headerlink" title="Ribbon常用负载均衡算法:"></a>Ribbon常用负载均衡算法:</h4><p><strong>IRule接口,Riboon使用该接口,根据特定算法从所有服务中,选择一个服务,</strong></p>
+<p><strong>Rule接口有7个实现类,每个实现类代表一个负载均衡算法</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的14.png" alt=""></p>
+<h4 id="使用Ribbon-1"><a href="#使用Ribbon-1" class="headerlink" title="使用Ribbon:"></a>使用Ribbon:</h4><p><strong>==这里使用eureka的那一套服务==</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的15.png" alt=""></p>
+<p><strong>==也就是不能放在主启动类所在的包及子包下==</strong></p>
+<h5 id="1-修改order模块"><a href="#1-修改order模块" class="headerlink" title="1,修改order模块"></a>1,修改order模块</h5><h5 id="2-额外创建一个包"><a href="#2-额外创建一个包" class="headerlink" title="2,额外创建一个包"></a>2,额外创建一个包</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的16.png" alt=""></p>
+<h5 id="3-创建配置类-指定负载均衡算法"><a href="#3-创建配置类-指定负载均衡算法" class="headerlink" title="3,创建配置类,指定负载均衡算法"></a>3,创建配置类,指定负载均衡算法</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的17.png" alt=""></p>
+<h5 id="4-在主启动类上加一个注解"><a href="#4-在主启动类上加一个注解" class="headerlink" title="4,在主启动类上加一个注解"></a>4,在主启动类上加一个注解</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的18.png" alt=""></p>
+<p><strong>表示,访问CLOUD_pAYMENT_SERVICE的服务时,使用我们自定义的负载均衡算法</strong></p>
+<h4 id="自定义负载均衡算法"><a href="#自定义负载均衡算法" class="headerlink" title="自定义负载均衡算法:"></a>自定义负载均衡算法:</h4><h5 id="1-ribbon的轮询算法原理"><a href="#1-ribbon的轮询算法原理" class="headerlink" title="1,ribbon的轮询算法原理"></a>1,ribbon的轮询算法原理</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的19.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的21.png" alt=""></p>
+<h5 id="2-自定义负载均衡算法"><a href="#2-自定义负载均衡算法" class="headerlink" title="2,自定义负载均衡算法:"></a>2,自定义负载均衡算法:</h5><p><strong>1,给</strong>pay模块(8001,8002),的controller方法添加一个方法,返回当前节点端口</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的23.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的22.png" alt=""></p>
+<p><strong>2,修改order模块</strong></p>
+<p>去掉@LoadBalanced</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的24.png" alt=""></p>
+<h5 id="3-自定义接口"><a href="#3-自定义接口" class="headerlink" title="3,自定义接口"></a>3,自定义接口</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的29.png" alt=""></p>
+<p>​                    ==具体的算法在实现类中实现==</p>
+<h5 id="4-接口实现类"><a href="#4-接口实现类" class="headerlink" title="4,接口实现类"></a>4,接口实现类</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的25.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的26.png" alt=""></p>
+<h5 id="5-修改controller"><a href="#5-修改controller" class="headerlink" title="5,修改controller:"></a>5,修改controller:</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的27.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Ribbon的28.png" alt=""></p>
+<h5 id="6-启动服务-测试即可"><a href="#6-启动服务-测试即可" class="headerlink" title="6,启动服务,测试即可"></a>6,启动服务,测试即可</h5><h2 id="11-OpenFeign"><a href="#11-OpenFeign" class="headerlink" title="11,OpenFeign"></a>11,OpenFeign</h2><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Feign的1.png" alt=""></p>
+<p><strong>是一个声明式的web客户端,只需要创建一个接口,添加注解即可完成微服务之间的调用</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Feign的2.png" alt=""></p>
+<p>==就是A要调用B,Feign就是在A中创建一个一模一样的B对外提供服务的的接口,我们调用这个接口,就可以服务到B==</p>
+<h3 id="Feign与OpenFeign区别"><a href="#Feign与OpenFeign区别" class="headerlink" title="Feign与OpenFeign区别"></a><strong>Feign与OpenFeign区别</strong></h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Feign的3.png" alt=""></p>
+<h3 id="使用OpenFeign"><a href="#使用OpenFeign" class="headerlink" title="使用OpenFeign"></a>使用OpenFeign</h3><pre><code class="java">之前的服务间调用,我们使用的是ribbon+RestTemplate
+        现在改为使用Feign
+</code></pre>
+<h4 id="1-新建一个order项目-用于feign测试"><a href="#1-新建一个order项目-用于feign测试" class="headerlink" title="1,新建一个order项目,用于feign测试"></a>1,新建一个order项目,用于feign测试</h4><p>名字cloud_order_feign-80</p>
+<h4 id="2-pom文件"><a href="#2-pom文件" class="headerlink" title="2,pom文件"></a>2,pom文件</h4><h4 id="3-配置文件-3"><a href="#3-配置文件-3" class="headerlink" title="3,配置文件"></a>3,配置文件</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Feign的4.png" alt=""></p>
+<h4 id="4-主启动类-3"><a href="#4-主启动类-3" class="headerlink" title="4,主启动类"></a>4,主启动类</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Feign的5.png" alt=""></p>
+<h4 id="5-fegin需要调用的其他的服务的接口"><a href="#5-fegin需要调用的其他的服务的接口" class="headerlink" title="5,fegin需要调用的其他的服务的接口"></a>5,fegin需要调用的其他的服务的接口</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Feign的6.png" alt=""></p>
+<h4 id="6-controller-1"><a href="#6-controller-1" class="headerlink" title="6,controller"></a>6,controller</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Feign的7.png" alt=""></p>
+<h4 id="7测试"><a href="#7测试" class="headerlink" title="7测试:"></a>7测试:</h4><p>启动两个erueka(7001,7002)</p>
+<p>启动两个pay(8001,8002)</p>
+<p>启动当前的order模块</p>
+<p><strong>Feign默认使用ribbon实现负载均衡</strong></p>
+<h3 id="OpenFeign超时机制"><a href="#OpenFeign超时机制" class="headerlink" title="OpenFeign超时机制:"></a>OpenFeign超时机制:</h3><p>==OpenFeign默认等待时间是1秒,超过1秒,直接报错==</p>
+<h4 id="1-设置超时时间-修改配置文件"><a href="#1-设置超时时间-修改配置文件" class="headerlink" title="1,设置超时时间,修改配置文件:"></a>1,设置超时时间,修改配置文件:</h4><p><strong>因为OpenFeign的底层是ribbon进行负载均衡,所以它的超时时间是由ribbon控制</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Feign的8.png" alt=""></p>
+<h3 id="OpenFeign日志"><a href="#OpenFeign日志" class="headerlink" title="OpenFeign日志:"></a>OpenFeign日志:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Feign的9.png" alt=""></p>
+<p><strong>OpenFeign的日志级别有:</strong><br><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Feign的10.png" alt=""></p>
+<h4 id="1-使用OpenFeign的日志"><a href="#1-使用OpenFeign的日志" class="headerlink" title="1,使用OpenFeign的日志:"></a>1,使用OpenFeign的日志:</h4><p><strong>实现在配置类中添加OpenFeign的日志类</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Feign的11.png" alt=""></p>
+<h4 id="2-为指定类设置日志级别"><a href="#2-为指定类设置日志级别" class="headerlink" title="2,为指定类设置日志级别:"></a>2,为指定类设置日志级别:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Feign的13.png" alt=""></p>
+<p><strong>配置文件中:</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Feign的12.png" alt=""></p>
+<h4 id="3-启动服务即可"><a href="#3-启动服务即可" class="headerlink" title="3,启动服务即可"></a>3,启动服务即可</h4><h1 id="4-服务降级"><a href="#4-服务降级" class="headerlink" title="4,服务降级:"></a>4,服务降级:</h1><h2 id="12-Hystrix服务降级"><a href="#12-Hystrix服务降级" class="headerlink" title="12,Hystrix服务降级"></a>12,Hystrix服务降级</h2><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的2.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的3.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的4.png" alt=""></p>
+<h3 id="hystrix中的重要概念"><a href="#hystrix中的重要概念" class="headerlink" title="hystrix中的重要概念:"></a>hystrix中的重要概念:</h3><h4 id="1-服务降级"><a href="#1-服务降级" class="headerlink" title="1,服务降级"></a>1,服务降级</h4><p><strong>比如当某个服务繁忙,不能让客户端的请求一直等待,应该立刻返回给客户端一个备选方案</strong></p>
+<h4 id="2-服务熔断"><a href="#2-服务熔断" class="headerlink" title="2,服务熔断"></a>2,服务熔断</h4><p><strong>当某个服务出现问题,卡死了,不能让用户一直等待,需要关闭所有对此服务的访问</strong></p>
+<p>​            <strong>然后调用服务降级</strong></p>
+<h4 id="3-服务限流"><a href="#3-服务限流" class="headerlink" title="3,服务限流"></a>3,服务限流</h4><p><strong>限流,比如秒杀场景,不能访问用户瞬间都访问服务器,限制一次只可以有多少请求</strong></p>
+<h3 id="使用hystrix-服务降级"><a href="#使用hystrix-服务降级" class="headerlink" title="使用hystrix,服务降级:"></a>使用hystrix,服务降级:</h3><h4 id="1-创建带降级机制的pay模块"><a href="#1-创建带降级机制的pay模块" class="headerlink" title="1,创建带降级机制的pay模块 :"></a>1,创建带降级机制的pay模块 :</h4><p>名字: cloud-hystrix-pay-8007</p>
+<h5 id="2-pom文件-1"><a href="#2-pom文件-1" class="headerlink" title="2,pom文件"></a>2,pom文件</h5><h5 id="3-配置文件-4"><a href="#3-配置文件-4" class="headerlink" title="3,配置文件"></a>3,配置文件</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的5.png" alt=""></p>
+<h5 id="4-主启动类-4"><a href="#4-主启动类-4" class="headerlink" title="4,主启动类"></a>4,主启动类</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的8.png" alt=""></p>
+<h5 id="5-service"><a href="#5-service" class="headerlink" title="5,service"></a>5,service</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的6.png" alt=""></p>
+<h5 id="6controller"><a href="#6controller" class="headerlink" title="6controller"></a>6controller</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的7.png" alt=""></p>
+<h5 id="7-先测试"><a href="#7-先测试" class="headerlink" title="7,先测试:"></a>7,先测试:</h5><pre><code class="java">此时使用压测工具,并发<span class="number">20000</span>个请求,请求会延迟的那个方法,
+        压测中,发现,另外一个方法并没有被压测,但是我们访问它时,却需要等待
+        这就是因为被压测的方法它占用了服务器大部分资源,导致其他请求也变慢了
+</code></pre>
+<h5 id="8-先不加入hystrix"><a href="#8-先不加入hystrix" class="headerlink" title="8,先不加入hystrix,"></a>8,先不加入hystrix,</h5><h4 id="2-创建带降级的order模块"><a href="#2-创建带降级的order模块" class="headerlink" title="2,创建带降级的order模块:"></a>2,创建带降级的order模块:</h4><h5 id="1-名字-cloud-hystrix-order-80"><a href="#1-名字-cloud-hystrix-order-80" class="headerlink" title="1,名字:  cloud-hystrix-order-80"></a>1,名字:  cloud-hystrix-order-80</h5><h5 id="2-pom-1"><a href="#2-pom-1" class="headerlink" title="2,pom"></a>2,pom</h5><h5 id="3-配置文件-5"><a href="#3-配置文件-5" class="headerlink" title="3,配置文件"></a>3,配置文件</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的9.png" alt=""></p>
+<h5 id="4-主启动类-5"><a href="#4-主启动类-5" class="headerlink" title="4,主启动类"></a>4,主启动类</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的11.png" alt=""></p>
+<h5 id="5-远程调用pay模块的接口"><a href="#5-远程调用pay模块的接口" class="headerlink" title="5,远程调用pay模块的接口:"></a>5,远程调用pay模块的接口:</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的12.png" alt=""></p>
+<h5 id="6-controller-2"><a href="#6-controller-2" class="headerlink" title="6,controller:"></a>6,controller:</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的13.png" alt=""></p>
+<h5 id="7-测试"><a href="#7-测试" class="headerlink" title="7,测试"></a>7,测试</h5><p>​            启动order模块,访问pay</p>
+<p>​            再次压测2万并发,发现order访问也变慢了</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的14.png" alt=""></p>
+<p><strong>解决:</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的15.png" alt=""></p>
+<h5 id=""><a href="#" class="headerlink" title=""></a><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的16.png" alt=""></h5><h4 id="3-配置服务降级"><a href="#3-配置服务降级" class="headerlink" title="3,配置服务降级:"></a>3,配置服务降级:</h4><h5 id="1-修改pay模块"><a href="#1-修改pay模块" class="headerlink" title="1,修改pay模块"></a>1,修改pay模块</h5><h6 id="1-为service的指定方法-会延迟的方法-添加-HystrixCommand注解"><a href="#1-为service的指定方法-会延迟的方法-添加-HystrixCommand注解" class="headerlink" title="1,为service的指定方法(会延迟的方法)添加@HystrixCommand注解"></a>1,为service的指定方法(会延迟的方法)添加@HystrixCommand注解</h6><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的17.png" alt=""></p>
+<h6 id="2-主启动类上-添加激活hystrix的注解"><a href="#2-主启动类上-添加激活hystrix的注解" class="headerlink" title="2,主启动类上,添加激活hystrix的注解"></a>2,主启动类上,添加激活hystrix的注解</h6><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的18.png" alt=""></p>
+<h6 id="3-触发异常"><a href="#3-触发异常" class="headerlink" title="3,触发异常"></a>3,触发异常</h6><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的19.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的20.png" alt=""><strong>可以看到,也触发了降级</strong></p>
+<h5 id="2-修改order模块-进行服务降级"><a href="#2-修改order模块-进行服务降级" class="headerlink" title="2,修改order模块,进行服务降级"></a>2,修改order模块,进行服务降级</h5><p>一般服务降级,都是放在客户端(order模块),</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的21.png" alt=""></p>
+<h6 id="1-修改配置文件-1"><a href="#1-修改配置文件-1" class="headerlink" title="1,修改配置文件:"></a>1,修改配置文件:</h6><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的22.png" alt=""></p>
+<h6 id="2-主启动类添加直接-启用hystrix"><a href="#2-主启动类添加直接-启用hystrix" class="headerlink" title="2,主启动类添加直接,启用hystrix:"></a><strong>2,主启动类添加直接,启用hystrix:</strong></h6><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的23.png" alt=""></p>
+<p>​    </p>
+<h6 id="3-修改controller-添加降级方法什么的"><a href="#3-修改controller-添加降级方法什么的" class="headerlink" title="3,修改controller,添加降级方法什么的"></a>3,修改controller,添加降级方法什么的</h6><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的24.png" alt=""></p>
+<h6 id="4-测试"><a href="#4-测试" class="headerlink" title="4,测试"></a>4,测试</h6><p>启动pay模块,order模块,</p>
+<p><strong>注意:,这里pay模块和order模块都开启了服务降级</strong></p>
+<p>​            但是order这里,设置了1.5秒就降级,所以访问时,一定会降级</p>
+<h5 id="4-重构"><a href="#4-重构" class="headerlink" title="4,重构:"></a>4,重构:</h5><p><strong>上面出现的问题:</strong><br>        1,降级方法与业务方法写在了一块,耦合度高</p>
+<p>​        2.每个业务方法都写了一个降级方法,重复代码多</p>
+<h5 id="解决重复代码的问题"><a href="#解决重复代码的问题" class="headerlink" title="解决重复代码的问题:"></a><strong>解决重复代码的问题</strong>:</h5><p><strong>配置一个全局的降级方法,所有方法都可以走这个降级方法,至于某些特殊创建,再单独创建方法</strong></p>
+<h6 id="1-创建一个全局方法"><a href="#1-创建一个全局方法" class="headerlink" title="1,创建一个全局方法"></a>1,创建一个全局方法</h6><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的26.png" alt=""></p>
+<h6 id="2-使用注解指定其为全局降级方法-默认降级方法"><a href="#2-使用注解指定其为全局降级方法-默认降级方法" class="headerlink" title="2,使用注解指定其为全局降级方法(默认降级方法)"></a>2,使用注解指定其为全局降级方法(默认降级方法)</h6><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的27.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的25.png" alt=""></p>
+<h6 id="3-业务方法使用默认降级方法"><a href="#3-业务方法使用默认降级方法" class="headerlink" title="3,业务方法使用默认降级方法:"></a>3,业务方法使用默认降级方法:</h6><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的28.png" alt=""></p>
+<h6 id="4-测试-1"><a href="#4-测试-1" class="headerlink" title="4,测试:"></a>4,测试:</h6><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的29.png" alt=""></p>
+<h5 id="解决代码耦合度的问题"><a href="#解决代码耦合度的问题" class="headerlink" title="解决代码耦合度的问题:"></a>解决代码耦合度的问题:</h5><p>修改order模块,这里开始,pay模块就不服务降级了,服务降级写在order模块即可</p>
+<h6 id="1-Payservice接口是远程调用pay模块的-我们这里创建一个类实现service接口-在实现类中统一处理异常"><a href="#1-Payservice接口是远程调用pay模块的-我们这里创建一个类实现service接口-在实现类中统一处理异常" class="headerlink" title="1,Payservice接口是远程调用pay模块的,我们这里创建一个类实现service接口,在实现类中统一处理异常"></a>1,Payservice接口是远程调用pay模块的,我们这里创建一个类实现service接口,在实现类中统一处理异常</h6><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的30.png" alt=""></p>
+<h6 id="2-修改配置文件-添加"><a href="#2-修改配置文件-添加" class="headerlink" title="2,修改配置文件:添加:"></a>2,修改配置文件:添加:</h6><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的31.png" alt=""></p>
+<h6 id="3-让PayService的实现类生效"><a href="#3-让PayService的实现类生效" class="headerlink" title="3,让PayService的实现类生效:"></a>3,让PayService的实现类生效:</h6><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的32.png" alt=""></p>
+<pre><code class="java">它的运行逻辑是:
+        当请求过来,首先还是通过Feign远程调用pay模块对应的方法
+    但是如果pay模块报错,调用失败,那么就会调用PayMentFalbackService类的
+    当前同名的方法,作为降级方法
+</code></pre>
+<h6 id="4-启动测试"><a href="#4-启动测试" class="headerlink" title="4,启动测试"></a>4,启动测试</h6><p>启动order和pay正常访问–ok</p>
+<p>==此时将pay服务关闭,order再次访问==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的33.png" alt=""></p>
+<p>可以看到,并没有报500错误,而是降级访问==实现类==的同名方法</p>
+<p>这样,即使服务器挂了,用户要不要一直等待,或者报错</p>
+<p>问题:</p>
+<p>​        <strong>这样虽然解决了代码耦合度问题,但是又出现了过多重复代码的问题,每个方法都有一个降级方法</strong></p>
+<h3 id="使用服务熔断"><a href="#使用服务熔断" class="headerlink" title="使用服务熔断:"></a>使用服务熔断:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的34.png" alt=""></p>
+<p><strong>比如并发达到1000,我们就拒绝其他用户访问,在有用户访问,就访问降级方法</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的35.png" alt=""></p>
+<h4 id="1-修改前面的pay模块"><a href="#1-修改前面的pay模块" class="headerlink" title="1,修改前面的pay模块"></a>1,修改前面的pay模块</h4><h5 id="1-修改Payservice接口-添加服务熔断相关的方法"><a href="#1-修改Payservice接口-添加服务熔断相关的方法" class="headerlink" title="1,修改Payservice接口,添加服务熔断相关的方法:"></a><strong>1,修改Payservice接口,添加服务熔断相关的方法:</strong></h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的37.png" alt=""></p>
+<p>这里属性整体意思是:<br>            10秒之内(窗口,会移动),如果并发==超过==10个,或者10个并发中,失败了6个,就开启熔断器</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的43.png" alt="image-20200414152637247"></p>
+<p>IdUtil是Hutool包下的类,这个Hutool就是整合了所有的常用方法,比如UUID,反射,IO流等工具方法什么的都整合了</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的36.png" alt=""></p>
+<pre><code class="java">断路器的打开和关闭,是按照一下<span class="number">5</span>步决定的
+      <span class="number">1</span>,并发此时是否达到我们指定的阈值
+      <span class="number">2</span>,错误百分比,比如我们配置了<span class="number">60</span>%,那么如果并发请求中,<span class="number">10</span>次有<span class="number">6</span>次是失败的,就开启断路器
+      <span class="number">3</span>,上面的条件符合,断路器改变状态为open(开启)
+      <span class="number">4</span>,这个服务的断路器开启,所有请求无法访问
+      <span class="number">5</span>,在我们的时间窗口期,期间,尝试让一些请求通过(半开状态),如果请求还是失败,证明断路器还是开启状态,服务没有恢复
+          如果请求成功了,证明服务已经恢复,断路器状态变为close关闭状态
+</code></pre>
+<h5 id="2-修改controller"><a href="#2-修改controller" class="headerlink" title="2,修改controller"></a>2,修改controller</h5><p>添加一个测试方法;</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的39.png" alt=""></p>
+<h5 id="3-测试"><a href="#3-测试" class="headerlink" title="3,测试:"></a>3,测试:</h5><p>启动pay,order模块</p>
+<p>==多次访问,并且错误率超过60%:==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的40.png" alt=""></p>
+<p>此时服务熔断,此时即使访问正确的也会报错:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的41.png" alt=""></p>
+<p><strong>但是,当过了几秒后,又恢复了</strong></p>
+<p>​                因为在10秒窗口期内,它自己会尝试接收部分请求,发现服务可以正常调用,慢慢的当错误率低于60%,取消熔断</p>
+<h3 id="Hystrix所有可配置的属性"><a href="#Hystrix所有可配置的属性" class="headerlink" title="Hystrix所有可配置的属性:"></a>Hystrix所有可配置的属性:</h3><p><strong>全部在这个方法中记录,以成员变量的形式记录,</strong></p>
+<p>​        以后需要什么属性,查看这个类即可</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的38.png" alt=""></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的42.png" alt=""></p>
+<p><strong>==当断路器开启后:==</strong></p>
+<p>​    <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的44.png" alt=""></p>
+<p><strong>==其他参数:==</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的45.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的46.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的47.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的48.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的49.png" alt=""></p>
+<p><strong>熔断整体流程:</strong></p>
+<pre><code class="java"><span class="number">1</span>请求进来,首先查询缓存,如果缓存有,直接返回
+      如果缓存没有,---&gt;<span class="number">2</span>
+<span class="number">2</span>,查看断路器是否开启,如果开启的,Hystrix直接将请求转发到降级返回,然后返回
+      如果断路器是关闭的,
+                判断线程池等资源是否已经满了,如果已经满了
+                      也会走降级方法
+              如果资源没有满,判断我们使用的什么类型的Hystrix,决定调用构造方法还是run方法
+        然后处理请求
+        然后Hystrix将本次请求的结果信息汇报给断路器,因为断路器此时可能是开启的
+                      (因为断路器开启也是可以接收请求的)
+                断路器收到信息,判断是否符合开启或关闭断路器的条件,
+                如果本次请求处理失败,又会进入降级方法
+        如果处理成功,判断处理是否超时,如果超时了,也进入降级方法
+        最后,没有超时,则本次请求处理成功,将结果返回给controller
+
+
+</code></pre>
+<h3 id="Hystrix服务监控"><a href="#Hystrix服务监控" class="headerlink" title="Hystrix服务监控:"></a>Hystrix服务监控:</h3><h4 id="HystrixDashboard"><a href="#HystrixDashboard" class="headerlink" title="HystrixDashboard"></a>HystrixDashboard</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的51.png" alt=""></p>
+<h4 id="2-使用HystrixDashboard"><a href="#2-使用HystrixDashboard" class="headerlink" title="2,使用HystrixDashboard:"></a>2,使用HystrixDashboard:</h4><h5 id="1-创建项目-1"><a href="#1-创建项目-1" class="headerlink" title="1,创建项目:"></a>1,创建项目:</h5><p>名字: cloud_hystrixdashboard_9001</p>
+<h5 id="2-pom文件-2"><a href="#2-pom文件-2" class="headerlink" title="2,pom文件"></a>2,pom文件</h5><h5 id="3-配置文件-6"><a href="#3-配置文件-6" class="headerlink" title="3,配置文件"></a>3,配置文件</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的52.png" alt=""></p>
+<h5 id="4-主启动类-6"><a href="#4-主启动类-6" class="headerlink" title="4,主启动类"></a>4,主启动类</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的53.png" alt=""></p>
+<h5 id="5-修改所有pay模块-8001-8002-8003…"><a href="#5-修改所有pay模块-8001-8002-8003…" class="headerlink" title="5,修改所有pay模块(8001,8002,8003…)"></a>5,修改所有pay模块(8001,8002,8003…)</h5><p><strong>他们都添加一个pom依赖:</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的54.png" alt=""></p>
+<p>之前的pom文件中都添加过了,==这个是springboot的监控组件==</p>
+<h5 id="6-启动9001即可"><a href="#6-启动9001即可" class="headerlink" title="6,启动9001即可"></a>6,启动9001即可</h5><p>​            访问: <strong>localhost:9001/hystrix</strong></p>
+<h5 id="7-注意-此时仅仅是可以访问HystrixDashboard-并不代表已经监控了8001-8002"><a href="#7-注意-此时仅仅是可以访问HystrixDashboard-并不代表已经监控了8001-8002" class="headerlink" title="7,注意,此时仅仅是可以访问HystrixDashboard,并不代表已经监控了8001,8002"></a>7,注意,此时仅仅是可以访问HystrixDashboard,并不代表已经监控了8001,8002</h5><p>​                            如果要监控,还需要配置:(8001为例)</p>
+<p>==8001的主启动类添加:==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的55.png" alt=""></p>
+<p><strong>其他8002,8003都是一样的</strong></p>
+<h5 id="8-到此-可以启动服务"><a href="#8-到此-可以启动服务" class="headerlink" title="8,到此,可以启动服务"></a>8,到此,可以启动服务</h5><p>启动7001,8001,9001</p>
+<p><strong>然后在web界面,指定9001要监控8001:</strong></p>
+<h5 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的56.png" alt=""></h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的57.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的59.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的58.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的60.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的61.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Hystrix的62.png" alt=""></p>
+<h1 id="5-服务网关"><a href="#5-服务网关" class="headerlink" title="5,服务网关:"></a>5,服务网关:</h1><p>zuul停更了,</p>
+<h2 id="13-GateWay"><a href="#13-GateWay" class="headerlink" title="13,GateWay"></a>13,GateWay</h2><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的1.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的2.png" alt=""></p>
+<p><strong>gateway之所以性能号,因为底层使用WebFlux,而webFlux底层使用netty通信(NIO)</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的3.png" alt=""></p>
+<h3 id="GateWay的特性"><a href="#GateWay的特性" class="headerlink" title="GateWay的特性:"></a>GateWay的特性:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的4.png" alt=""></p>
+<h3 id="GateWay与zuul的区别"><a href="#GateWay与zuul的区别" class="headerlink" title="GateWay与zuul的区别:"></a>GateWay与zuul的区别:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的5.png" alt=""></p>
+<h3 id="zuul1-x的模型"><a href="#zuul1-x的模型" class="headerlink" title="zuul1.x的模型:"></a>zuul1.x的模型:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的6.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的7.png" alt=""></p>
+<h3 id="什么是webflux"><a href="#什么是webflux" class="headerlink" title="什么是webflux:"></a>什么是webflux:</h3><p><strong>是一个非阻塞的web框架,类似springmvc这样的</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的8.png" alt=""></p>
+<h3 id="GateWay的一些概念"><a href="#GateWay的一些概念" class="headerlink" title="GateWay的一些概念:"></a>GateWay的一些概念:</h3><h4 id="1-路由"><a href="#1-路由" class="headerlink" title="1,路由:"></a>1,路由:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的9.png" alt=""></p>
+<p>就是根据某些规则,将请求发送到指定服务上</p>
+<h4 id="2-断言"><a href="#2-断言" class="headerlink" title="2,断言:"></a>2,断言:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的10.png" alt=""></p>
+<p>就是判断,如果符合条件就是xxxx,反之yyyy</p>
+<h4 id="3-过滤"><a href="#3-过滤" class="headerlink" title="3,过滤:"></a>3,过滤:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的11.png" alt=""></p>
+<p>​    <strong>路由前后,过滤请求</strong></p>
+<h3 id="GateWay的工作原理"><a href="#GateWay的工作原理" class="headerlink" title="GateWay的工作原理:"></a>GateWay的工作原理:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的12.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的13.png" alt=""></p>
+<h3 id="使用GateWay"><a href="#使用GateWay" class="headerlink" title="使用GateWay:"></a>使用GateWay:</h3><p>想要新建一个GateWay的项目</p>
+<p>名字:     cloud_gateway_9527</p>
+<h4 id="1-pom-1"><a href="#1-pom-1" class="headerlink" title="1,pom"></a>1,pom</h4><h4 id="2-配置文件-3"><a href="#2-配置文件-3" class="headerlink" title="2,配置文件"></a>2,配置文件</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的14.png" alt=""></p>
+<h4 id="3-主启动类-4"><a href="#3-主启动类-4" class="headerlink" title="3,主启动类"></a>3,主启动类</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的15.png" alt=""></p>
+<h4 id="4-针对pay模块-设置路由"><a href="#4-针对pay模块-设置路由" class="headerlink" title="4,针对pay模块,设置路由:"></a>4,针对pay模块,设置路由:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的16.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的18.png" alt=""></p>
+<p><strong>==修改GateWay模块(9527)的配置文件==:</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的17.png" alt=""></p>
+<p>这里表示,</p>
+<p>​            当访问localhost:9527/payment/get/1时,     </p>
+<p>​            路由到localhost:8001/payment/get/1</p>
+<h4 id="5-开始测试"><a href="#5-开始测试" class="headerlink" title="5,开始测试"></a>5,开始测试</h4><p><strong>启动7001,8001,9527</strong></p>
+<pre><code class="java">如果启动GateWay报错
+      可能是GateWay模块引入了web和监控的starter依赖,需要移除
+</code></pre>
+<p>访问:</p>
+<p>​        localhost:9527/payment/get/1</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的19.png" alt=""></p>
+<h4 id="6-GateWay的网关配置"><a href="#6-GateWay的网关配置" class="headerlink" title="6,GateWay的网关配置,"></a>6,GateWay的网关配置,</h4><p>​        <strong>GateWay的网关配置,除了支持配置文件,还支持硬编码方式</strong></p>
+<h4 id="7使用硬编码配置GateWay"><a href="#7使用硬编码配置GateWay" class="headerlink" title="7使用硬编码配置GateWay:"></a>7使用硬编码配置GateWay:</h4><h5 id="创建配置类"><a href="#创建配置类" class="headerlink" title="创建配置类:"></a>创建配置类:</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的20.png" alt=""></p>
+<h4 id="8-然后重启服务即可"><a href="#8-然后重启服务即可" class="headerlink" title="8,然后重启服务即可"></a>8,然后重启服务即可</h4><h3 id="重构"><a href="#重构" class="headerlink" title="重构:"></a>重构:</h3><p>上面的配置虽然首先了网关,但是是在配置文件中写死了要路由的地址</p>
+<p>现在需要修改,不指定地址,而是根据微服务名字进行路由,我们可以在注册中心获取某组微服务的地址</p>
+<p>需要:</p>
+<p>​        1个eureka,2个pay模块</p>
+<h4 id="修改GateWay模块的配置文件"><a href="#修改GateWay模块的配置文件" class="headerlink" title="修改GateWay模块的配置文件:"></a>修改GateWay模块的配置文件:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的21.png" alt=""></p>
+<h4 id="然后就可以启动微服务-测试"><a href="#然后就可以启动微服务-测试" class="headerlink" title="然后就可以启动微服务.测试"></a>然后就可以启动微服务.测试</h4><h3 id="Pridicate断言"><a href="#Pridicate断言" class="headerlink" title="Pridicate断言:"></a>Pridicate断言:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的24.png" alt=""></p>
+<p><strong>我们之前在配置文件中配置了断言:</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的22.png" alt=""></p>
+<p><strong>这个断言表示,如果外部访问路径是指定路径,就路由到指定微服务上</strong></p>
+<p>可以看到,这里有一个Path,这个是断言的一种,==断言的类型==:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的23.png" alt=""></p>
+<pre><code class="java">After:
+        可以指定,只有在指定时间后,才可以路由到指定微服务
+</code></pre>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的26.png" alt=""></p>
+<p>​                这里表示,只有在==2020年的2月21的15点51分37秒==之后,访问==才可以路由==</p>
+<p>​                在此之前的访问,都会报404</p>
+<p>如何获取当前时区?**</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的25.png" alt=""></p>
+<pre><code class="java">before:
+        与after类似,他说在指定时间之前的才可以访问
+between:
+        需要指定两个时间,在他们之间的时间才可以访问
+</code></pre>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的27.png" alt=""></p>
+<pre><code class="java">cookie:
+        只有包含某些指定cookie(key,value),的请求才可以路由
+</code></pre>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的28.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的29.png" alt=""></p>
+<pre><code class="java">Header:
+        只有包含指定请求头的请求,才可以路由
+</code></pre>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的31.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的32.png" alt=""></p>
+<p>测试:<br><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的33.png" alt=""></p>
+<pre><code class="java">host:
+        只有指定主机的才可以访问,
+        比如我们当前的网站的域名是www.aa.com
+    那么这里就可以设置,只有用户是www.aa.com的请求,才进行路由
+</code></pre>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的34.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的35.png" alt="gateway的34"></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的36.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的37.png" alt=""></p>
+<p>可以看到,如果带了域名访问,就可以,但是直接访问ip地址.就报错了</p>
+<pre><code class="java">method:
+        只有指定请求才可以路由,比如get请求...
+</code></pre>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的38.png" alt=""></p>
+<pre><code class="java">path:
+        只有访问指定路径,才进行路由
+     比如访问,/abc才路由
+</code></pre>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的39.png" alt=""></p>
+<pre><code class="java">Query:
+        必须带有请求参数才可以访问
+</code></pre>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的40.png" alt=""></p>
+<h3 id="Filter过滤器"><a href="#Filter过滤器" class="headerlink" title="Filter过滤器:"></a>Filter过滤器:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的41.png" alt=""></p>
+<h4 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期:"></a>生命周期:</h4><p><strong>在请求进入路由之前,和处理请求完成,再次到达路由之前</strong></p>
+<h4 id="种类"><a href="#种类" class="headerlink" title="种类:"></a>种类:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的42.png" alt=""></p>
+<p>GateWayFilter,单一的过滤器</p>
+<p><strong>与断言类似,比如闲置,请求头,只有特定的请求头才放行,反之就过滤</strong>:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的43.png" alt=""></p>
+<p>GlobalFilter,全局过滤器:</p>
+<h4 id="自定义过滤器"><a href="#自定义过滤器" class="headerlink" title="自定义过滤器:"></a><strong>自定义过滤器:</strong></h4><p>实现两个接口</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的44.png" alt=""></p>
+<p>​    <strong>然后启动服务,即可,因为过滤器通过@COmponet已经加入到容器了</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的46.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\gateway的45.png" alt=""></p>
+<h1 id="6-服务配置"><a href="#6-服务配置" class="headerlink" title="6,服务配置:"></a>6,服务配置:</h1><h2 id="Spring-Config分布式配置中心"><a href="#Spring-Config分布式配置中心" class="headerlink" title="Spring Config分布式配置中心:"></a>Spring Config分布式配置中心:</h2><p>==微服务面临的问题==</p>
+<pre><code class="java">可以看到,每个微服务都需要一个配置文件,并且,如果有几个微服务都需要连接数据库
+        那么就需要配<span class="number">4</span>次数据库相关配置,并且当数据库发生改动,那么需要同时修改<span class="number">4</span>个微服务的配置文件才可以
+</code></pre>
+<p>所以有了springconfig配置中心</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的1.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的2.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的3.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的4.png" alt=""></p>
+<h3 id="使用配置中心"><a href="#使用配置中心" class="headerlink" title="使用配置中心:"></a>使用配置中心:</h3><h4 id="0-使用github作为配置中心的仓库"><a href="#0-使用github作为配置中心的仓库" class="headerlink" title="0,使用github作为配置中心的仓库:"></a>0,使用github作为配置中心的仓库:</h4><p><strong>初始化git环境:</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的5.png" alt=""></p>
+<h4 id="1-新建config模块"><a href="#1-新建config模块" class="headerlink" title="1,新建config模块:"></a>1,新建config模块:</h4><p>名字:   cloud-config-3344</p>
+<h4 id="2-pom-2"><a href="#2-pom-2" class="headerlink" title="2,pom"></a>2,pom</h4><h4 id="3-配置文件-7"><a href="#3-配置文件-7" class="headerlink" title="3,配置文件"></a>3,配置文件</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的6.png" alt=""></p>
+<h4 id="4-主启动类-7"><a href="#4-主启动类-7" class="headerlink" title="4,主启动类"></a>4,主启动类</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的7.png" alt=""></p>
+<h4 id="5-修改hosts"><a href="#5-修改hosts" class="headerlink" title="5,修改hosts:"></a>5,修改hosts:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的8.png" alt=""></p>
+<h4 id="6-配置完成"><a href="#6-配置完成" class="headerlink" title="6,配置完成"></a>6,配置完成</h4><p>测试,3344是否可以从github上获取配置</p>
+<p>启动3344    (要先启动eureka)</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的9.png" alt=""></p>
+<p>它实际上就是,读取到配置文件中的GitHub的地址,然后拼接上/master/config-dev.yml</p>
+<h4 id="7-读取配置文件的规则"><a href="#7-读取配置文件的规则" class="headerlink" title="7,读取配置文件的规则:"></a>7,读取配置文件的规则:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的10.png" alt=""></p>
+<p>==2,==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的11.png" alt=""></p>
+<p><strong>这里默认会读取master分支,因为我们配置文件中配置了</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的12.png" alt=""></p>
+<p>==3==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的13.png" alt=""></p>
+<p>注意,这个方式读取到的配置是==json格式==的</p>
+<p><strong>所有规则:</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的14.png" alt=""></p>
+<h3 id="2-创建配置中心客户端"><a href="#2-创建配置中心客户端" class="headerlink" title="2,创建配置中心客户端:"></a>2,创建配置中心客户端:</h3><h4 id="1-创建config客户端项目"><a href="#1-创建config客户端项目" class="headerlink" title="1,创建config客户端项目"></a>1,创建config客户端项目</h4><p>名字:     cloud-config-client-3355</p>
+<h4 id="2-pom-3"><a href="#2-pom-3" class="headerlink" title="2,pom"></a>2,pom</h4><h4 id="3-配置文件-8"><a href="#3-配置文件-8" class="headerlink" title="3,配置文件"></a>3,配置文件</h4><p>注意这个配置文件就不是application.yml</p>
+<p>​            而是bootstrap.yml</p>
+<p>这个配置文件的作用是,先到配置中心加载配置,然后加载到application.yml中</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的15.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的16.png" alt=""></p>
+<h4 id="4-主启动类-8"><a href="#4-主启动类-8" class="headerlink" title="4,主启动类:"></a>4,主启动类:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的17.png" alt=""></p>
+<h4 id="5-controller类"><a href="#5-controller类" class="headerlink" title="5,controller类"></a>5,controller类</h4><p>就是上面提到的,以rest风格将配置对外暴露</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的18.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的19.png" alt=""></p>
+<p><strong>如果客户端运行正常,就会读取到github上配置文件的,config.info下的配置</strong></p>
+<h4 id="6-测试"><a href="#6-测试" class="headerlink" title="6,测试:"></a>6,测试:</h4><p>启动3344,3355</p>
+<p>​    访问3355的  /configInfo</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的21.png" alt=""></p>
+<h4 id="7-问题"><a href="#7-问题" class="headerlink" title="7,问题::"></a>7,问题::</h4><pre><code class="java">上面<span class="number">3355</span>确实获取到了配置文件,但是如果此时配置文件修改了,<span class="number">3355</span>是获取不到的
+        <span class="number">3344</span>可以实时获取到最新配置文件,但是<span class="number">3355</span>却获取不到
+      除非重启服务
+</code></pre>
+<h4 id="8-实现动态刷新"><a href="#8-实现动态刷新" class="headerlink" title="8,实现动态刷新:"></a><strong>8,实现动态刷新:</strong></h4><h5 id="1-修改3355-添加一个pom依赖"><a href="#1-修改3355-添加一个pom依赖" class="headerlink" title="1,修改3355,添加一个pom依赖:"></a>1,修改3355,添加一个pom依赖:</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的22.png" alt=""></p>
+<h5 id="2-修改配置文件-添加一个配置"><a href="#2-修改配置文件-添加一个配置" class="headerlink" title="2,修改配置文件,添加一个配置:"></a>2,修改配置文件,添加一个配置:</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的23.png" alt=""></p>
+<h5 id="3-修改controller"><a href="#3-修改controller" class="headerlink" title="3,修改controller:"></a>3,修改controller:</h5><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的24.png" alt=""></p>
+<h5 id="4-此时重启服务"><a href="#4-此时重启服务" class="headerlink" title="4,此时重启服务"></a>4,此时重启服务</h5><p><strong>此时3355还不可以动态获取</strong></p>
+<p>因为此时,还需要==外部==发送post请求通知3355</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的25.png" alt=""></p>
+<p><strong>此时在刷新3355,发现可以获取到最新的配置文件了,这就实现了动态获取配置文件,因为3355并没有重启</strong></p>
+<p>具体流程就是:</p>
+<p>​            我们启动好服务后</p>
+<p>​            运维人员,修改了配置文件,然后发送一个post请求通知3355</p>
+<p>​            3355就可以获取最新配置文件</p>
+<p><strong>问题:</strong></p>
+<p>​        如果有多个客户端怎么办(3355,3356,3357…..)</p>
+<p>​                        虽然可以使用shell脚本,循环刷新</p>
+<p>​        但是,可不可以使用广播,一次通知??</p>
+<p>​                    这些springconfig做不到,需要使用springcloud Bus消息总线</p>
+<h1 id="消息总线"><a href="#消息总线" class="headerlink" title="消息总线:"></a>消息总线:</h1><h2 id="SpringCloud-Bus"><a href="#SpringCloud-Bus" class="headerlink" title="SpringCloud Bus:"></a>SpringCloud Bus:</h2><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的26.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的27.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的31.png" alt=""></p>
+<p>注意,这里年张图片,就代表两种广播方式</p>
+<p>​            图1:        <strong>它是Bus直接通知给其中一个客户端,由这个客户端开始蔓延,传播给其他所有客户端</strong></p>
+<p>​            图2:        它<strong>是通知给配置中心的服务端,有服务端广播给所有客户端</strong></p>
+<p><strong>为什么被称为总线?</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的28.png" alt=""></p>
+<pre><code class="java">就是通过消息队列达到广播的效果
+          我们要广播每个消息时,主要放到某个topic中,所有监听的节点都可以获取到
+</code></pre>
+<h3 id="使用Bus"><a href="#使用Bus" class="headerlink" title="使用Bus:"></a>使用Bus:</h3><h4 id="1-配置rabbitmq环境"><a href="#1-配置rabbitmq环境" class="headerlink" title="1,配置rabbitmq环境:"></a>1,配置rabbitmq环境:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的29.png" alt=""></p>
+<h4 id="2-之前只有一个配置中心客户端-这里在创建一个"><a href="#2-之前只有一个配置中心客户端-这里在创建一个" class="headerlink" title="2,之前只有一个配置中心客户端,这里在创建一个"></a><strong>2,之前只有一个配置中心客户端,这里在创建一个</strong></h4><p>​        ==<strong>复制3355即可,创建为3366</strong>==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的30.png" alt=""></p>
+<p>全部复制3355的即可</p>
+<h4 id="2-使用Bus实现全局广播"><a href="#2-使用Bus实现全局广播" class="headerlink" title="2,使用Bus实现全局广播"></a>2,使用Bus实现全局广播</h4><p><strong>Bus广播有两种方式:</strong></p>
+<p>​        ==就是上面两个图片的两种方式==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的32.png" alt=""></p>
+<p><strong>这两种方式,第二种跟合适,因为:</strong></p>
+<p>​            ==第一种的缺点:==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\springconfig的33.png" alt=""></p>
+<h4 id="配置第二种方式"><a href="#配置第二种方式" class="headerlink" title="配置第二种方式:"></a><strong>配置第二种方式:</strong></h4><h5 id="1-配置3344-配置中心服务端"><a href="#1-配置3344-配置中心服务端" class="headerlink" title="1,配置3344(配置中心服务端):"></a><strong>1,配置3344(配置中心服务端):</strong></h5><h6 id="1-修改配置文件-2"><a href="#1-修改配置文件-2" class="headerlink" title="1,修改配置文件:"></a>1,修改配置文件:</h6><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Bus的1.png" alt=""></p>
+<h6 id="2-添加pom"><a href="#2-添加pom" class="headerlink" title="2,添加pom"></a>2,添加pom</h6><p><strong>springboot的监控组件,和消息总线</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Bus的3.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Bus的2.png" alt=""></p>
+<h5 id="2-修改3355-配置中心的客户端"><a href="#2-修改3355-配置中心的客户端" class="headerlink" title="2,修改3355(配置中心的客户端)"></a>2,修改3355(配置中心的客户端)</h5><h6 id="1-pom-2"><a href="#1-pom-2" class="headerlink" title="1,pom:"></a>1,pom:</h6><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Bus的3.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Bus的2.png" alt="Bus的2"></p>
+<h6 id="2-配置文件-4"><a href="#2-配置文件-4" class="headerlink" title="2,配置文件:"></a>2,配置文件:</h6><p>==注意配置文件的名字,要改为bootstrap.yml==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Bus的5.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Bus的4" alt="image-20200415102708661"></p>
+<h5 id="3-修改3366-也是配置中心的客户端"><a href="#3-修改3366-也是配置中心的客户端" class="headerlink" title="3,修改3366(也是配置中心的客户端)"></a>3,修改3366(也是配置中心的客户端)</h5><p>​            修改与3355是一模一样的</p>
+<h5 id="4-测试-2"><a href="#4-测试-2" class="headerlink" title="4,测试"></a>4,测试</h5><p>启动7001,3344,3355,3366</p>
+<p>此时修改GitHub上的配置文件</p>
+<p>==此时只需要刷新3344,即可让3355,3366动态获取最新的配置文件==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Bus的6.png" alt=""></p>
+<p>其原理就是:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Bus的7.png" alt=""></p>
+<p><strong>所有客户端都监听了一个rabbitMq的topic,我们将信息放入这个topic,所有客户端都可以送到,从而实时更新</strong></p>
+<h4 id="配置定点通知"><a href="#配置定点通知" class="headerlink" title="配置定点通知"></a>配置定点通知</h4><p>​        就是只通知部分服务,比如只通知3355,不通知3366</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Bus的8.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Bus的9.png" alt="Bus的8"></p>
+<p><strong>只通知3355</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Bus的11.png" alt=""></p>
+<p>​    <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Bus的12.png" alt=""></p>
+<p><strong>可以看到,实际上就是通过==微服务的名称+端口号==进行指定</strong></p>
+<h1 id="8-消息驱动"><a href="#8-消息驱动" class="headerlink" title="8,消息驱动:"></a>8,消息驱动:</h1><h2 id="Spring-Cloud-Stream"><a href="#Spring-Cloud-Stream" class="headerlink" title="Spring Cloud Stream:"></a>Spring Cloud Stream:</h2><pre><code class="java">现在一个很项目可能分为三部分:
+            前端---&gt;后端----&gt;大数据
+            而后端开发使用消息中间件,可能会使用RabbitMq
+            而大数据开发,一般都是使用Kafka,
+            那么一个项目中有多个消息中间件,对于程序员,因为人员都不友好
+</code></pre>
+<p>而Spring Cloud Stream就类似jpa,屏蔽底层消息中间件的差异,程序员主要操作Spring Cloud Stream即可</p>
+<p>​            不需要管底层是kafka还是rabbitMq</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的1.png" alt=""></p>
+<h3 id="什么是Spring-Cloud-Stream"><a href="#什么是Spring-Cloud-Stream" class="headerlink" title="==什么是Spring Cloud Stream=="></a>==什么是Spring Cloud Stream==</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的2.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的3.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的4.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的5.png" alt=""></p>
+<h3 id="Spring-Cloud-Stream是怎么屏蔽底层差异的"><a href="#Spring-Cloud-Stream是怎么屏蔽底层差异的" class="headerlink" title="==Spring Cloud Stream是怎么屏蔽底层差异的?=="></a>==<strong>Spring Cloud Stream是怎么屏蔽底层差异的?</strong>==</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的6.png" alt=""></p>
+<p><strong>绑定器:</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的7.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的8.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的9.png" alt=""></p>
+<h3 id="Spring-Cloud-Streamd-通信模式"><a href="#Spring-Cloud-Streamd-通信模式" class="headerlink" title="Spring Cloud Streamd 通信模式:"></a><strong>Spring Cloud Streamd 通信模式:</strong></h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的10.png" alt=""><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的11.png" alt=""></p>
+<h3 id="Spring-Cloud-Stream的业务流程"><a href="#Spring-Cloud-Stream的业务流程" class="headerlink" title="Spring Cloud Stream的业务流程:"></a>Spring Cloud Stream的业务流程:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的12.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的14.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的13.png" alt=""></p>
+<pre><code class="java">类似flume中的channel,source,sink  估计是借鉴(抄袭)的
+      source用于获取数据(要发送到mq的数据)
+      channel类似SpringCloudStream中的中间件,用于存放source接收到的数据,或者是存放binder拉取的数据    
+</code></pre>
+<h3 id="常用注解和api"><a href="#常用注解和api" class="headerlink" title="常用注解和api:"></a>常用注解和api:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的15.png" alt=""></p>
+<h3 id="使用SpringCloudStream"><a href="#使用SpringCloudStream" class="headerlink" title="使用SpringCloudStream:"></a>使用SpringCloudStream:</h3><p>需要创建三个项目,一个生产者,两个消费者</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的16.png" alt=""></p>
+<h3 id="1-创建生产者"><a href="#1-创建生产者" class="headerlink" title="1,创建生产者"></a>1,创建生产者</h3><h4 id="1-pom-3"><a href="#1-pom-3" class="headerlink" title="1,pom"></a>1,pom</h4><h4 id="2-配置文件-5"><a href="#2-配置文件-5" class="headerlink" title="2,配置文件"></a>2,配置文件</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的17" alt="image-20200415114816133"></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的18.png" alt=""></p>
+<h4 id="3-主启动类-5"><a href="#3-主启动类-5" class="headerlink" title="3,主启动类"></a>3,主启动类</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的19.png" alt=""></p>
+<h4 id="4-service和实现类"><a href="#4-service和实现类" class="headerlink" title="4,service和实现类"></a>4,service和实现类</h4><p>service定义发送消息</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的20.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的21.png" alt=""></p>
+<p><strong>这里,就会调用send方法,将消息发送给channel,</strong></p>
+<p>​                <strong>然后channel将消费发送给binder,然后发送到rabbitmq中</strong></p>
+<h4 id="5-controller-2"><a href="#5-controller-2" class="headerlink" title="5,controller"></a>5,controller</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的22.png" alt=""></p>
+<h4 id="6-可以测试"><a href="#6-可以测试" class="headerlink" title="6,可以测试"></a>6,可以测试</h4><p><strong>启动rabbitmq</strong></p>
+<p><strong>启动7001,8801</strong></p>
+<p>​        确定8801后,会在rabbitmq中创建一个Exchange,就是我们配置文件中配置的exchange</p>
+<p><strong>访问8801的/sendMessage</strong></p>
+<h3 id="创建消费者"><a href="#创建消费者" class="headerlink" title="创建消费者:"></a>创建消费者:</h3><h4 id="1-pom文件-2"><a href="#1-pom文件-2" class="headerlink" title="1,pom文件"></a>1,pom文件</h4><h4 id="2-配置文件-6"><a href="#2-配置文件-6" class="headerlink" title="2,配置文件"></a>2,配置文件</h4><p>==<strong>这里排版一点问题</strong>==</p>
+<p><strong>==input==就表示,当前服务是一个消费者,需要消费消息,下面就是指定消费哪个Exchange中的消息</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的23.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的24.png" alt=""></p>
+<h4 id="3-主启动类-6"><a href="#3-主启动类-6" class="headerlink" title="3,主启动类"></a>3,主启动类</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的25.png" alt=""></p>
+<h4 id="4-业务类-消费数据"><a href="#4-业务类-消费数据" class="headerlink" title="4,业务类(消费数据)"></a>4,业务类(消费数据)</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的26.png" alt=""></p>
+<p><strong>生产者发送消息时,使用send方法发送,send方法发送的是一个个Message,里面封装了数据</strong></p>
+<h4 id="5-测试"><a href="#5-测试" class="headerlink" title="5,测试:"></a>5,测试:</h4><p>启动7001.8801.8802</p>
+<p><strong>此时使用生产者生产消息</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的27.png" alt=""></p>
+<p>==可以看到,消费者已经接收到消息了==</p>
+<h3 id="创建消费者2"><a href="#创建消费者2" class="headerlink" title="创建消费者2"></a>创建消费者2</h3><p>创建8803,</p>
+<p>==与8802创建一模一样,就不写了==</p>
+<p><strong>创建8803主要是为了演示重复消费等问题</strong></p>
+<p>…</p>
+<p>….</p>
+<p>…</p>
+<h3 id="重复消费问题"><a href="#重复消费问题" class="headerlink" title="==重复消费问题:=="></a>==重复消费问题:==</h3><p>此时启动7001.8801.8802.8803</p>
+<p>此时生产者生产一条消息</p>
+<p>但是此时查询消费者,发现8802,8803==都消费到了同一条数据==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的28.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的29.png" alt=""></p>
+<h4 id="1-自定义分组"><a href="#1-自定义分组" class="headerlink" title="1,自定义分组"></a>1,自定义分组</h4><p><strong>修改8802,8803的配置文件</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的30.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的31 - 副本.png" alt=""></p>
+<p><strong>现在将8802,8803都分到了A组</strong></p>
+<p>然后去重启02,03</p>
+<p><strong>然后此时生产者生产两条消息</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的33.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的34.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\SpringCloudStream的35.png" alt=""></p>
+<p><strong>可以看到,每人只消费了一条消息,并且没有重复消费</strong></p>
+<h3 id="持久化问题"><a href="#持久化问题" class="headerlink" title="持久化问题:"></a>持久化问题:</h3><p>就是当服务挂了,怎么消费没有消费的数据??</p>
+<p>这里,先将8802移除A组,</p>
+<p>​        然后将02,03服务关闭</p>
+<p>此时生产者开启,发送3条消息</p>
+<p>​        此时重启02,03</p>
+<p>​        可以看到,当02退出A组后,它就获取不到在它宕机的时间段内的数据</p>
+<p>​        但是03重启后,直接获取到了宕机期间它没有消费的数据,并且消费了</p>
+<p>总结:<br>        也就是,当我们没有配置分组时,会出现消息漏消费的问题</p>
+<p>​        而配置分组后,我们可以自动获取未消费的数据</p>
+<h1 id="9-链路追踪"><a href="#9-链路追踪" class="headerlink" title="9,链路追踪:"></a>9,链路追踪:</h1><h2 id="Spring-Cloud-Sleuth"><a href="#Spring-Cloud-Sleuth" class="headerlink" title="Spring Cloud Sleuth"></a>Spring Cloud Sleuth</h2><p><strong>sleuth要解决的问题:</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sleuth的1.png" alt=""></p>
+<p><strong>而来sleuth就是用于追踪每个请求的整体链路</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sleuth的2.png" alt=""></p>
+<h3 id="使用sleuth"><a href="#使用sleuth" class="headerlink" title="使用sleuth:"></a>使用sleuth:</h3><h4 id="1-安装zipkin"><a href="#1-安装zipkin" class="headerlink" title="1,安装zipkin:"></a>1,安装zipkin:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sleuth的3.png" alt=""></p>
+<p><strong>运行jar包</strong></p>
+<p>​            java -jar xxxx.jar</p>
+<p><strong>然后就可以访问web界面,  默认zipkin监听的端口是9411</strong></p>
+<p>​            localhost:9411/zipkin/</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sleuth的4.png" alt=""></p>
+<p><strong>一条链路完整图片:</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sleuth的5.png" alt=""></p>
+<p><strong>精简版:</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sleuth的6.png" alt=""></p>
+<p><strong>可以看到,类似链表的形式</strong></p>
+<h4 id="2-使用sleuth"><a href="#2-使用sleuth" class="headerlink" title="2,使用sleuth:"></a>2,使用sleuth:</h4><p>不需要额外创建项目,使用之前的8001和order的80即可</p>
+<h5 id="1-修改8001"><a href="#1-修改8001" class="headerlink" title="1,修改8001"></a>1,修改8001</h5><p><strong>引入pom:</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sleuth的7.png" alt=""></p>
+<p>这个包虽然叫zipkin但是,里面包含了zpikin与sleuth</p>
+<p><strong>修改配置文件:</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sleuth的8.png" alt=""></p>
+<h5 id="2-修改80"><a href="#2-修改80" class="headerlink" title="2,修改80"></a>2,修改80</h5><p><strong>添加pom</strong></p>
+<p>与上面是一样的</p>
+<p><strong>添加配置</strong>:</p>
+<p>与上面也是一样的</p>
+<h5 id="3-测试-1"><a href="#3-测试-1" class="headerlink" title="3,测试:"></a>3,测试:</h5><p>启动7001.8001,80,9411</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sleuth的9.png" alt=""></p>
+<h1 id="10-Spring-CloudAlibaba"><a href="#10-Spring-CloudAlibaba" class="headerlink" title="10,Spring CloudAlibaba:"></a>10,Spring CloudAlibaba:</h1><p><strong>之所以有Spring CloudAlibaba,是因为Spring Cloud Netflix项目进入维护模式</strong></p>
+<p>​        <strong>也就是,就不是不更新了,不会开发新组件了</strong></p>
+<p>​        <strong>所以,某些组件都有代替版了,比如Ribbon由Loadbalancer代替,等等</strong></p>
+<p>==支持的功能==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的1.png" alt=""></p>
+<p>几乎可以将之前的Spring Cloud代替</p>
+<p>==具体组件==:<br><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的2.png" alt=""></p>
+<h2 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos:"></a>Nacos:</h2><p><strong>服务注册和配置中心的组合</strong></p>
+<p>​            Nacos=erueka+config+bus</p>
+<h3 id="安装Nacos"><a href="#安装Nacos" class="headerlink" title="安装Nacos:"></a>安装Nacos:</h3><p>需要java8  和 Mavne</p>
+<p><strong>1,到github上下载安装包</strong></p>
+<p>​        解压安装包</p>
+<p><strong>2,启动Nacos</strong></p>
+<p>​        在bin下,进入cod</p>
+<p>​        ./startup.cmd</p>
+<p><strong>3,访问Nacos</strong></p>
+<p>​        Nacos默认监听8848</p>
+<p>​        localhost:8848/nacos</p>
+<p>​        账号密码:默认都是nacos</p>
+<h3 id="使用Nacos"><a href="#使用Nacos" class="headerlink" title="使用Nacos:"></a>使用Nacos:</h3><p>新建pay模块</p>
+<p>​        <strong>现在不需要额外的服务注册模块了,Nacos单独启动了</strong></p>
+<p>名字: cloudalibaba-pay-9001</p>
+<h4 id="1-pom-4"><a href="#1-pom-4" class="headerlink" title="1,pom"></a>1,pom</h4><p>父项目管理alibaba的依赖:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的4.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的3.png" alt=""></p>
+<p>==9001的pom==:</p>
+<p>​            另外一个文件…..</p>
+<h4 id="2-配置文件-7"><a href="#2-配置文件-7" class="headerlink" title="2,配置文件"></a>2,配置文件</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的5.png" alt=""></p>
+<h4 id="3-启动类"><a href="#3-启动类" class="headerlink" title="3,启动类"></a>3,启动类</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的6.png" alt=""></p>
+<h4 id="4-controller-1"><a href="#4-controller-1" class="headerlink" title="4,controller:"></a>4,controller:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的7.png" alt=""></p>
+<h4 id="5-测试-1"><a href="#5-测试-1" class="headerlink" title="5,测试"></a>5,测试</h4><p>启动9001</p>
+<p>然后查看Nacos的web界面,可以看到9001已经注册成功</p>
+<p>### </p>
+<h3 id="创建其他Pay模块"><a href="#创建其他Pay模块" class="headerlink" title="创建其他Pay模块"></a>创建其他Pay模块</h3><p>​        额外在创建9002,9003</p>
+<p>​        直接复制上面的即可</p>
+<h3 id="创建order模块"><a href="#创建order模块" class="headerlink" title="创建order模块"></a>创建order模块</h3><p>名字:  cloudalibaba-order-83</p>
+<h4 id="1-pom-5"><a href="#1-pom-5" class="headerlink" title="1,pom"></a>1,pom</h4><p><strong>为什么Nacos支持负载均衡?</strong></p>
+<p>​                Nacos直接集成了Ribon,所以有负载均衡</p>
+<h4 id="2-配置文件-8"><a href="#2-配置文件-8" class="headerlink" title="2,配置文件"></a>2,配置文件</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的8.png" alt=""></p>
+<p><strong>这个server-url的作用是,我们在controller,需要使用RestTempalte远程调用9001,</strong></p>
+<p>​        <strong>这里是指定9001的地址</strong></p>
+<h4 id="3-主启动类-7"><a href="#3-主启动类-7" class="headerlink" title="3,主启动类"></a>3,主启动类</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的9.png" alt=""></p>
+<h4 id="4-编写配置类"><a href="#4-编写配置类" class="headerlink" title="4,编写配置类"></a>4,编写配置类</h4><p>​    ==因为Naocs要使用Ribbon进行负载均衡,那么就需要使用RestTemplate==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的10.png" alt=""></p>
+<h4 id="5-controller-3"><a href="#5-controller-3" class="headerlink" title="5,controller:"></a>5,controller:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的11.png" alt=""></p>
+<h4 id="6-测试-1"><a href="#6-测试-1" class="headerlink" title="6,测试"></a>6,测试</h4><p>启动83,访问9001,9002,可以看到,实现了负载均衡</p>
+<h3 id="Nacos与其他服务注册的对比"><a href="#Nacos与其他服务注册的对比" class="headerlink" title="Nacos与其他服务注册的对比"></a>Nacos与其他服务注册的对比</h3><p>Nacos它既可以支持CP,也可以支持AP,可以切换</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的12.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的13.png" alt=""></p>
+<p>==下面这个curl命令,就是切换模式==</p>
+<h3 id="使用Nacos作为配置中心"><a href="#使用Nacos作为配置中心" class="headerlink" title="使用Nacos作为配置中心:"></a>使用Nacos作为配置中心:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的14.png" alt=""></p>
+<p><strong>==需要创建配置中心的客户端模块==</strong></p>
+<p>cloudalibaba-Nacos-config-client-3377</p>
+<h4 id="1-pom-6"><a href="#1-pom-6" class="headerlink" title="1,pom"></a>1,pom</h4><h4 id="2-配置文件-9"><a href="#2-配置文件-9" class="headerlink" title="2,配置文件"></a>2,配置文件</h4><p>这里需要配置两个配置文件,application.ymk和bootstarp.yml</p>
+<p>​            主要是为了可以与spring clodu config无缝迁移</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的15.png" alt=""></p>
+<pre><code class="java">可以看到
+</code></pre>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的16.png" alt=""></p>
+<h4 id="3-主启动类-8"><a href="#3-主启动类-8" class="headerlink" title="3,主启动类"></a>3,主启动类</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的18.png" alt=""></p>
+<h4 id="4-controller-2"><a href="#4-controller-2" class="headerlink" title="4,controller"></a>4,controller</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的17.png" alt=""></p>
+<pre><code class="java">可以看到,这里也添加了<span class="meta">@RefreshScope</span>
+          之前在Config配置中心,也是添加这个注解实现动态刷新的    
+
+</code></pre>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的19.png" alt=""></p>
+<h4 id="5-在Nacos添加配置信息"><a href="#5-在Nacos添加配置信息" class="headerlink" title="5,在Nacos添加配置信息:"></a>5,在Nacos添加配置信息:</h4><p>==<strong>Nacos的配置规则:</strong>==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的20.png" alt=""></p>
+<p><strong>配置规则,就是我们在客户端如何指定读取配置文件,配置文件的命名的规则</strong></p>
+<p>默认的命名方式:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的21.png" alt=""></p>
+<pre><code class="java">prefix:
+        默认就是当前服务的服务名称
+         也可以通过spring.cloud.necos.config.prefix配置
+spring.profile.active:
+        就是我们在application.yml中指定的,当前是开发环境还是测试等环境
+    这个可以不配置,如果不配置,那么前面的 -  也会没有
+file-extension
+     就是当前文件的格式(后缀),目前只支持yml和properties
+</code></pre>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的24.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的25.png" alt=""></p>
+<p>==在web UI上创建配置文件:==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的22.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的23.png" alt=""></p>
+<p>注意,DataId就是配置文件名字:</p>
+<p>​        名字一定要按照上面的==规则==命名,否则客户端会读取不到配置文件</p>
+<h4 id="6-测试-2"><a href="#6-测试-2" class="headerlink" title="6,测试"></a>6,测试</h4><p>重启3377客户端</p>
+<p>访问3377</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的26.png" alt=""></p>
+<p><strong>拿到了配置文件中的值</strong></p>
+<h4 id="7-注意默认就开启了自动刷新"><a href="#7-注意默认就开启了自动刷新" class="headerlink" title="7,注意默认就开启了自动刷新"></a>7,注意默认就开启了自动刷新</h4><p>此时我们修改了配置文件</p>
+<p>客户端是可以立即更新的</p>
+<p>​            因为Nacos支持Bus总线,会自动发送命令更新所有客户端</p>
+<h3 id="Nacos配置中心之分类配置"><a href="#Nacos配置中心之分类配置" class="headerlink" title="Nacos配置中心之分类配置:"></a>Nacos配置中心之分类配置:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的27.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的28.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的29.png" alt=""></p>
+<p>NameSpace默认有一个:public名称空间</p>
+<p>这三个类似java的: 包名 + 类名 + 方法名</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的30.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的31.png" alt=""></p>
+<h4 id="1-配置不同DataId"><a href="#1-配置不同DataId" class="headerlink" title="1,配置不同DataId:"></a>1,配置不同DataId:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的32.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的33.png" alt=""></p>
+<p>​    ==通过配置文件,实现多环境的读取:==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的34.png" alt=""></p>
+<pre><code class="java">此时,改为dev,就会读取dev的配置文件,改为test,就会读取test的配置文件
+</code></pre>
+<h4 id="2-配置不同的GroupID"><a href="#2-配置不同的GroupID" class="headerlink" title="2,配置不同的GroupID:"></a>2,配置不同的GroupID:</h4><p>直接在新建配置文件时指定组</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的35.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的36.png" alt=""></p>
+<p>==在客户端配置,使用指定组的配置文件:==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的37.png" alt=""></p>
+<p><strong>这两个配置文件都要修改</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的38.png" alt=""></p>
+<p>​    </p>
+<p>重启服务,即可</p>
+<h4 id="配置不同的namespace"><a href="#配置不同的namespace" class="headerlink" title="配置不同的namespace:"></a>配置不同的namespace:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的39.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的42.png" alt=""></p>
+<p>==客户端配置使用不同名称空间:==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的41.png" alt=""></p>
+<p><strong>要通过命名空间id指定</strong></p>
+<p>OK,测试</p>
+<h3 id="Nacos集群和持久化配置"><a href="#Nacos集群和持久化配置" class="headerlink" title="Nacos集群和持久化配置:"></a>Nacos集群和持久化配置:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的45.png" alt=""></p>
+<p>Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,就不能使用自己的数据库</p>
+<p>​            不然每个节点一个数据库,那么数据就不统一了,需要使用外部的mysql</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的43.png" alt=""></p>
+<h4 id="1-单机版-切换mysql数据库"><a href="#1-单机版-切换mysql数据库" class="headerlink" title="1,单机版,切换mysql数据库:"></a>1,单机版,切换mysql数据库:</h4><p>​                    <strong>将nacos切换到使用我们自己的mysql数据库:</strong></p>
+<p><strong>1,nacos默认自带了一个sql文件,在nacos安装目录下</strong></p>
+<p>​            将它放到我们的mysql执行</p>
+<p><strong>2,修改Nacos安装目录下的安排application.properties,添加:</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的46.png" alt=""></p>
+<p><strong>3,此时可以重启nacos,那么就会改为使用我们自己的mysql</strong></p>
+<h4 id="Linux上配置Nacos集群-Mysql数据库"><a href="#Linux上配置Nacos集群-Mysql数据库" class="headerlink" title="Linux上配置Nacos集群+Mysql数据库"></a>Linux上配置Nacos集群+Mysql数据库</h4><p>==官方架构图:==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的45.png" alt=""></p>
+<p><strong>需要一个Nginx作为VIP</strong></p>
+<p>1,下载安装Nacos的Linux版安装包</p>
+<p>2,进入安装目录,现在执行自带的sql文件</p>
+<p>​            进入mysql,执行sql文件</p>
+<p>3.修改配置文件,切换为我们的mysql</p>
+<p>​            就是上面windos版要修改的几个属性</p>
+<p>4,修改cluster.conf,指定哪几个节点是Nacos集群</p>
+<p>​            这里使用3333,4444,5555作为三个Nacos节点监听的端口</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的47.png" alt=""></p>
+<p>5,我们这里就不配置在不同节点上了,就放在一个节点上</p>
+<p>​            既然要在一个节点上启动不同Nacos实例,就要修改startup.sh,使其根据不同端口启动不同Nacos实例</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的48.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的49.png" alt=""></p>
+<p>可以看到,这个脚本就是通过jvm启动nacos</p>
+<p>​        所以我们最后修改的就是,nohup java -Dserver.port=3344</p>
+<p>6,配置Nginx:</p>
+<p>​            <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的50.png" alt=""></p>
+<p>7,启动Nacos:<br>            ./startup.sh -p 3333</p>
+<p>​            ./startup.sh -p 4444</p>
+<p>​            ./startup.sh -p 5555</p>
+<p>7,启动nginx</p>
+<p>8,测试:</p>
+<p>​        访问192.168.159.121:1111</p>
+<p>​        如果可以进入nacos的web界面,就证明安装成功了</p>
+<p>9,将微服务注册到Nacos集群:<br><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的51.png" alt=""></p>
+<p>10,进入Nacos的web界面</p>
+<p>​        可以看到,已经注册成功</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的52.png" alt=""></p>
+<h2 id="Sentinel"><a href="#Sentinel" class="headerlink" title="Sentinel:"></a>Sentinel:</h2><p>实现熔断与限流,就是Hystrix</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的53.png" alt=""></p>
+<p>​    <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的54.png" alt=""></p>
+<h3 id="使用sentinel"><a href="#使用sentinel" class="headerlink" title="==使用sentinel:=="></a>==使用sentinel:==</h3><p>1,下载sentinel的jar包</p>
+<p>2,运行sentinel</p>
+<p>​        由于是一个jar包,所以可以直接java -jar运行    </p>
+<p>​        注意,默认sentinel占用8080端口</p>
+<p>3,访问sentinel</p>
+<p>​        localhost:8080</p>
+<h3 id="微服务整合sentinel"><a href="#微服务整合sentinel" class="headerlink" title="微服务整合sentinel:"></a>微服务整合sentinel:</h3><h5 id="1-启动Nacos"><a href="#1-启动Nacos" class="headerlink" title="1,启动Nacos"></a>1,启动Nacos</h5><h5 id="2-新建一个项目-8401-主要用于配置sentinel"><a href="#2-新建一个项目-8401-主要用于配置sentinel" class="headerlink" title="2,新建一个项目,8401,主要用于配置sentinel"></a>2,新建一个项目,8401,主要用于配置sentinel</h5><ol>
+<li><p>pom</p>
+</li>
+<li><p>配置文件</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的55.png" alt=""></p>
+</li>
+<li><p>主启动类</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\Alibaba的56.png" alt=""></p>
+</li>
+<li><p>controller\</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的1.png" alt=""></p>
+</li>
+<li><p>到这里就可以启动8401</p>
+<p>​    此时我们到sentinel中查看,发现并8401的任何信息</p>
+<p>​    是因为,sentinel是懒加载,需要我们执行一次访问,才会有信息</p>
+<p>​    访问localhost/8401/testA</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的2.png" alt=""></p>
+</li>
+<li><p>可以看到.已经开始监听了</p>
+</li>
+</ol>
+<p>​    </p>
+<h3 id="sentinel的流控规则"><a href="#sentinel的流控规则" class="headerlink" title="sentinel的流控规则"></a>sentinel的流控规则</h3><p>流量限制控制规则</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的7.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的3.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的4.png" alt=""></p>
+<p>==流控模式==:</p>
+<ol>
+<li><p>直接快速失败</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的9.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的5.png" alt=""></p>
+<p>  ==直接失败的效果:==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的6.png" alt=""></p>
+</li>
+<li><p>线程数:</p>
+<p>​        <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的8.png" alt=""></p>
+<p>​    <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的10.png" alt=""></p>
+<pre><code>比如a请求过来,处理很慢,在一直处理,此时b请求又过来了
+        此时因为a占用一个线程,此时要处理b请求就只有额外开启一个线程
+        那么就会报错
+</code></pre><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的11.png" alt=""></p>
+</li>
+</ol>
+<ol start="3">
+<li><p>关联:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的12.png" alt=""></p>
+<p>==应用场景:  比如<strong>支付接口</strong>达到阈值,就要限流下<strong>订单的接口</strong>,防止一直有订单==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的13.png" alt=""></p>
+<p><strong>当testA达到阈值,qps大于1,就让testB之后的请求直接失败</strong></p>
+<p>可以使用postman压测</p>
+</li>
+</ol>
+<p>​    </p>
+<ol start="4">
+<li><p>链路:<br>多个请求调用同一个微服务</p>
+</li>
+<li><p>预热Warm up:</p>
+<p>​     <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的14.png" alt=""></p>
+<p> <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的15.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的16.png" alt=""></p>
+<p>==应用场景==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的17.png" alt=""></p>
+</li>
+<li><p>排队等待:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的18.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的19.png" alt=""></p>
+</li>
+</ol>
+<h3 id="降级规则"><a href="#降级规则" class="headerlink" title="降级规则:"></a>降级规则:</h3><p><strong>就是熔断降级</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的21.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的20.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的22.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的23.png" alt=""></p>
+<h4 id="1-RT配置"><a href="#1-RT配置" class="headerlink" title="1,RT配置:"></a>1,RT配置:</h4><p>新增一个请求方法用于测试</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的24.png" alt=""></p>
+<p>==配置RT:==</p>
+<p>​                这里配置的PT,默认是秒级的平均响应时间</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的25.png" alt=""></p>
+<p>默认计算平均时间是: 1秒类进入5个请求,并且响应的平均值超过阈值(这里的200ms),就报错]</p>
+<p>​            1秒5请求是Sentinel默认设置的</p>
+<p>==测试==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的27.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的26.png" alt=""></p>
+<p><strong>默认熔断后.就直接抛出异常</strong></p>
+<h4 id="2-异常比例"><a href="#2-异常比例" class="headerlink" title="2,异常比例:"></a>2,异常比例:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的28.png" alt=""></p>
+<p>修改请求方法</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的29.png" alt=""></p>
+<p>配置:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的31.png" alt=""></p>
+<p>==如果没触发熔断,这正常抛出异常==:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的32.png" alt=""></p>
+<p>==触发熔断==:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的33.png" alt=""></p>
+<h4 id="3-异常数"><a href="#3-异常数" class="headerlink" title="3, 异常数:"></a>3, 异常数:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的34.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的35.png" alt=""></p>
+<p>一分钟之内,有5个请求发送异常,进入熔断</p>
+<h3 id="热点规则"><a href="#热点规则" class="headerlink" title="热点规则:"></a>热点规则:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的36.png" alt=""></p>
+<p>​    <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的37.png" alt=""></p>
+<p>比如:</p>
+<p>​            localhost:8080/aa?name=aa</p>
+<p>​            localhost:8080/aa?name=b’b</p>
+<p>​            加入两个请求中,带有参数aa的请求访问频次非常高,我们就现在name==aa的请求,但是bb的不限制</p>
+<p>==如何自定义降级方法,而不是默认的抛出异常?==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的38.png" alt=""></p>
+<p><strong>使用@SentinelResource直接实现降级方法,它等同Hystrix的@HystrixCommand</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的39.png" alt=""></p>
+<p>==定义热点规则:==</p>
+<p> <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的40.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的42.png" alt=""></p>
+<p><strong>此时我们访问/testHotkey并且带上才是p1</strong></p>
+<p>​            如果qps大于1,就会触发我们定义的降级方法</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的41.png" alt=""></p>
+<p><strong>但是我们的参数是P2,就没有问题</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的44.png" alt=""></p>
+<p>只有带了p1,才可能会触发热点限流</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的43.png" alt=""></p>
+<h4 id="2-设置热点规则中的其他选项"><a href="#2-设置热点规则中的其他选项" class="headerlink" title="2,设置热点规则中的其他选项:"></a>2,设置热点规则中的其他选项:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的45.png" alt=""></p>
+<p><strong>需求:</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的46.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的47.png" alt=""></p>
+<p>==测试==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的48.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的49.png" alt=""></p>
+<p><strong>注意:</strong></p>
+<p>参数类型只支持,8种基本类型+String类</p>
+<p>==注意:==</p>
+<p>如果我们程序出现异常,是不会走blockHander的降级方法的,因为这个方法只配置了热点规则,没有配置限流规则</p>
+<p>我们这里配置的降级方法是sentinel针对热点规则配置的</p>
+<p>只有触发热点规则才会降级</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的50.png" alt=""></p>
+<h3 id="3-系统规则"><a href="#3-系统规则" class="headerlink" title="3,系统规则:"></a>3,系统规则:</h3><p>系统自适应限流:<br>            从整体维度对应用入口进行限流</p>
+<p>对整体限流,比如设置qps到达100,这里限流会限制整个系统不可以</p>
+<p><em><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的51.png" alt=""></em></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的52.png" alt=""></p>
+<p>==测试==:<br><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的53.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的54.png" alt=""></p>
+<h3 id="SentinelResource注解"><a href="#SentinelResource注解" class="headerlink" title="@SentinelResource注解:"></a>@SentinelResource注解:</h3><p><strong>用于配置降级等功能</strong></p>
+<p>1,环境搭建</p>
+<ol>
+<li><p>为8401添加依赖</p>
+<p>添加我们自己的commone包的依赖</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的55.png" alt=""></p>
+</li>
+<li><p>额外创建一个controller类</p>
+<p>​     <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的56.png" alt=""></p>
+</li>
+</ol>
+<ol start="3">
+<li><p>配置限流</p>
+<p><strong>注意,我们这里配置规则,资源名指定的是@SentinelResource注解value的值,</strong></p>
+<p><strong>这样也是可以的,也就是不一定要指定访问路径</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的57.png" alt=""></p>
+</li>
+<li><p>测试.</p>
+<p>可以看到已经进入降级方法了</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的58.png" alt=""></p>
+</li>
+<li><p>==此时我们关闭8401服务==</p>
+<p>可以看到,这些定义的规则是临时的,关闭服务,规则就没有了</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的59.png" alt=""></p>
+</li>
+</ol>
+<p><strong>可以看到,上面配置的降级方法,又出现Hystrix遇到的问题了</strong></p>
+<p>​            降级方法与业务方法耦合</p>
+<p>​            每个业务方法都需要对应一个降级方法</p>
+<h4 id="自定义限流处理逻辑"><a href="#自定义限流处理逻辑" class="headerlink" title="自定义限流处理逻辑:"></a>自定义限流处理逻辑:</h4><ol>
+<li><p>==单独创建一个类,用于处理限流==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的1.png" alt=""></p>
+</li>
+<li><p>==在controller中,指定使用自定义类中的方法作为降级方法==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的2.png" alt=""></p>
+</li>
+<li><p>==Sentinel中定义流控规则==:</p>
+<p>这里资源名,是以url指定,也可以使用@SentinelResource注解value的值指定</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的5.png" alt=""></p>
+</li>
+</ol>
+<ol start="4">
+<li><p>==测试==:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的3.png" alt=""></p>
+</li>
+<li><p>==整体==:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的4.png" alt=""></p>
+</li>
+<li></li>
+</ol>
+<h4 id="SentinelResource注解的其他属性"><a href="#SentinelResource注解的其他属性" class="headerlink" title="@SentinelResource注解的其他属性:"></a>@SentinelResource注解的其他属性:</h4><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的7.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的6.png" alt=""></p>
+<h3 id="服务熔断"><a href="#服务熔断" class="headerlink" title="服务熔断:"></a>服务熔断:</h3><ol>
+<li><p><strong>启动nacos和sentinel</strong></p>
+</li>
+<li><p><strong>新建两个pay模块  9003和9004</strong></p>
+<ol>
+<li><p>pom</p>
+</li>
+<li><p>配置文件</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的8.png" alt="">*</p>
+</li>
+<li><p>主启动类 </p>
+<p><code>`</code>java<br>@SpringBootApplication<br>@EnableDiscoveryClient<br>public class PaymentMain9003 {</p>
+<p>  public static void main(String[] args) {</p>
+<pre><code>SpringApplication.run(PaymentMain9003.class,args);
+</code></pre><p>  }<br>}</p>
+</li>
+</ol>
+</li>
+</ol>
+<pre><code>    ```
+
+4.   controller
+
+    ![](C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的9.png)
+
+     **然后启动9003.9004**
+</code></pre><ol start="3">
+<li><p><strong>新建一个order-84消费者模块:</strong></p>
+<ol>
+<li><p>pom</p>
+<p>与上面的pay一模一样</p>
+</li>
+<li><p>配置文件</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的10.png" alt=""></p>
+</li>
+<li><p>主启动类</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的11.png" alt=""></p>
+</li>
+<li><p>配置类</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的12.png" alt=""></p>
+</li>
+<li><p>controller</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的13.png" alt=""></p>
+</li>
+</ol>
+</li>
+</ol>
+<pre><code>6.   **==为业务方法添加fallback来指定降级方法==**:
+
+    ![](C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的14.png)
+
+    ​    ==重启order==
+
+    测试:
+
+    ![](C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的15.png)
+
+
+
+     ==所以,fallback是用于管理异常的,当业务方法发生异常,可以降级到指定方法==
+
+    ​            注意,我们这里==并没有使用sentinel配置任何规则==,但是却降级成功,就是因为
+
+    ​            fallback是用于管理异常的,当业务方法发生异常,可以降级到指定方法==
+
+
+
+7.   **==为业务方法添加blockHandler,看看是什么效果==**
+
+     ![](C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的16.png)
+
+     **重启84,访问业务方法:**
+
+    ![](C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的17.png)
+
+     可以看到.,直接报错了,并没有降级
+
+    ​                也就是说,blockHandler==只对sentienl定义的规则降级==
+
+
+
+8.   **==如果fallback和blockHandler都配置呢?==**]
+
+     ![](C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的18.png)
+
+     **设置qps规则,阈值1**
+
+     ![](C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的19.png)
+
+     ==测试:==
+
+    ![](C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的20.png)
+
+
+
+     可以看到,当两个都同时生效时,==blockhandler优先生效==
+
+9.  **==@SentinelResource还有一个属性,exceptionsToIgnore==**
+
+     ![](C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的21.png)
+
+     **exceptionsToIgnore指定一个异常类,**
+
+    ​                    **表示如果当前方法抛出的是指定的异常,不降级,直接对用户抛出异常**
+
+     ![](C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的22.png)
+</code></pre><h3 id="sentinel整合ribbon-openFeign-fallback"><a href="#sentinel整合ribbon-openFeign-fallback" class="headerlink" title="sentinel整合ribbon+openFeign+fallback"></a>sentinel整合ribbon+openFeign+fallback</h3><ol>
+<li><p>修改84模块,使其支持feign</p>
+<ol>
+<li><p>pom</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的23.png" alt=""></p>
+</li>
+<li><p>配置文件</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的24.png" alt=""></p>
+</li>
+<li><p>主启动类,也要修改</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的25.png" alt=""></p>
+</li>
+<li><p>创建远程调用pay模块的接口</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的26.png" alt=""></p>
+</li>
+<li><p>创建这个接口的实现类,用于降级</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的27.png" alt=""></p>
+</li>
+<li><p>再次修改接口,指定降级类</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的28.png" alt=""></p>
+</li>
+<li><p>controller添加远程调用</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的29.png" alt=""></p>
+</li>
+<li><p>测试</p>
+<p>启动9003,84</p>
+</li>
+<li><p>测试,如果关闭9003.看看84会不会降级</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的30.png" alt=""></p>
+<p><strong>可以看到,正常降级了</strong></p>
+</li>
+</ol>
+</li>
+</ol>
+<p><strong>熔断框架比较</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的31.png" alt=""></p>
+<h3 id="sentinel持久化规则"><a href="#sentinel持久化规则" class="headerlink" title="sentinel持久化规则"></a>sentinel持久化规则</h3><p>默认规则是临时存储的,重启sentinel就会消失</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的32.png" alt=""></p>
+<p><strong>这里以之前的8401为案例进行修改:</strong></p>
+<ol>
+<li><p>修改8401的pom</p>
+<pre><code class="xml">添加:
+<span class="comment">&lt;!-- SpringCloud ailibaba sentinel-datasource-nacos 持久化需要用到--&gt;</span>
+<span class="tag">&lt;<span class="name">dependency</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.csp<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>sentinel-datasource-nacos<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>
+
+</code></pre>
+</li>
+</ol>
+<ol start="2">
+<li><p>修改配置文件:</p>
+<p>添加:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的33.png" alt=""></p>
+<p><strong>实际上就是指定,我们的规则要保证在哪个名称空间的哪个分组下</strong></p>
+<pre><code>这里没有指定namespace, 但是是可以指定的
+</code></pre><p>​            <strong>注意,这里的dataid要与8401的服务名一致</strong></p>
+</li>
+<li><p><strong>在nacos中创建一个配置文件,dataId就是上面配置文件中指定的</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的34.png" alt=""></p>
+<p>==json中,这些属性的含义:==</p>
+<p>​    <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的35.png" alt=""></p>
+</li>
+</ol>
+<ol start="4">
+<li><p>启动8401:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的36.png" alt=""></p>
+<p>可以看到,直接读取到了规则</p>
+</li>
+<li><p>关闭8401</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的37.png" alt=""></p>
+</li>
+<li><p>此时重启8401,如果sentinel又可以正常读取到规则,那么证明持久化成功</p>
+<p>可以看到,又重新出现了</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\sentinel的的38.png" alt=""></p>
+</li>
+</ol>
+<h2 id="Seata"><a href="#Seata" class="headerlink" title="Seata:"></a>Seata:</h2><p>是一个分布式事务的解决方案,</p>
+<p><strong>分布式事务中的一些概念,也是seata中的概念:</strong></p>
+<p>​        <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的2.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的3.png" alt=""></p>
+<h3 id="seata安装"><a href="#seata安装" class="headerlink" title="seata安装:"></a>seata安装:</h3><ol>
+<li><p><strong>下载安装seata的安装包</strong></p>
+</li>
+<li><p><strong>修改file.conf</strong></p>
+<p> <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的4.png" alt=""></p>
+<p> <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的5.png" alt=""></p>
+<p> <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的6.png" alt=""></p>
+</li>
+<li><p><strong>mysql建库建表</strong></p>
+<p>1,上面指定了数据库为seata,所以创建一个数据库名为seata</p>
+<p>2,建表,在seata的安装目录下有一个db_store.sql,运行即可</p>
+</li>
+<li><p><strong>继续修改配置文件,修改registry.conf</strong></p>
+<p>配置seata作为微服务,指定注册中心</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的7.png" alt=""></p>
+</li>
+<li><p>启动</p>
+<p>先启动nacos</p>
+<p>在启动seata-server(运行安装目录下的,seata-server.bat)</p>
+</li>
+</ol>
+<p><strong>业务说明</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的8.png" alt=""></p>
+<p>下单—&gt;库存—&gt;账号余额</p>
+<ol>
+<li><p>创建三个数据库</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的9.png" alt=""></p>
+</li>
+<li><p>创建对应的表</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的10.png" alt=""></p>
+</li>
+<li><p>创建回滚日志表,方便查看</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的11.png" alt=""></p>
+<p><strong>注意==每个库都要执行一次==这个sql,生成回滚日志表</strong></p>
+</li>
+<li><p>==每个业务都创建一个微服务,也就是要有三个微服务,订单,库存,账号==</p>
+<p>​     ==订单==,seta-order-2001</p>
+<ol>
+<li><p>pom</p>
+</li>
+<li><p>配置文件</p>
+<p><code>`</code>yaml<br>server:<br>port: 2001</p>
+<p>spring:<br>application:<br>  name: seata-order-service<br>cloud:<br>  alibaba:</p>
+<pre><code>seata:
+  # 自定义事务组名称需要与seata-server中的对应,我们之前在seata的配置文件中配置的名字
+  tx-service-group: fsp_tx_group
+</code></pre><p>  nacos:</p>
+<pre><code>discovery:
+  server-addr: 127.0.0.1:8848
+</code></pre><p>datasource:</p>
+<h1 id="当前数据源操作类型"><a href="#当前数据源操作类型" class="headerlink" title="当前数据源操作类型"></a>当前数据源操作类型</h1><p>  type: com.alibaba.druid.pool.DruidDataSource</p>
+<h1 id="mysql驱动类"><a href="#mysql驱动类" class="headerlink" title="mysql驱动类"></a>mysql驱动类</h1><p>  driver-class-name: com.mysql.cj.jdbc.Driver<br>  url: jdbc:mysql://localhost:3306/seata_order?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=GMT%2B8<br>  username: root<br>  password: root<br>feign:<br>hystrix:<br>  enabled: false<br>logging:<br>level:<br>  io:</p>
+<pre><code>seata: info
+</code></pre><p>mybatis:<br>mapperLocations: classpath<em>:mapper/</em>.xml</p>
+</li>
+</ol>
+</li>
+</ol>
+<pre><code>    ```
+
+    还要额外创建其他配置文件,创建一个file.conf:
+
+     ```.conf
+    transport {
+      # tcp udt unix-domain-socket
+      type = &quot;TCP&quot;
+      #NIO NATIVE
+      server = &quot;NIO&quot;
+      #enable heartbeat
+      heartbeat = true
+      #thread factory for netty
+      thread-factory {
+        boss-thread-prefix = &quot;NettyBoss&quot;
+        worker-thread-prefix = &quot;NettyServerNIOWorker&quot;
+        server-executor-thread-prefix = &quot;NettyServerBizHandler&quot;
+        share-boss-worker = false
+        client-selector-thread-prefix = &quot;NettyClientSelector&quot;
+        client-selector-thread-size = 1
+        client-worker-thread-prefix = &quot;NettyClientWorkerThread&quot;
+        # netty boss thread size,will not be used for UDT
+        boss-thread-size = 1
+        #auto default pin or 8
+        worker-thread-size = 8
+      }
+      shutdown {
+        # when destroy server, wait seconds
+        wait = 3
+      }
+      serialization = &quot;seata&quot;
+      compressor = &quot;none&quot;
+    }
+    service {
+      #vgroup-&gt;rgroup
+      # 事务组名称
+      vgroup_mapping.fsp_tx_group = &quot;default&quot;
+      #only support single node
+      default.grouplist = &quot;127.0.0.1:8091&quot;
+      #degrade current not support
+      enableDegrade = false
+      #disable
+      disable = false
+      #unit ms,s,m,h,d represents milliseconds, seconds, minutes, hours, days, default permanent
+      max.commit.retry.timeout = &quot;-1&quot;
+      max.rollback.retry.timeout = &quot;-1&quot;
+    }
+
+    client {
+      async.commit.buffer.limit = 10000
+      lock {
+        retry.internal = 10
+        retry.times = 30
+      }
+      report.retry.count = 5
+      tm.commit.retry.count = 1
+      tm.rollback.retry.count = 1
+    }
+
+    ## transaction log store
+    store {
+      ## store mode: file、db
+      #mode = &quot;file&quot;
+      mode = &quot;db&quot;
+
+      ## file store
+      file {
+        dir = &quot;sessionStore&quot;
+
+        # branch session size , if exceeded first try compress lockkey, still exceeded throws exceptions
+        max-branch-session-size = 16384
+        # globe session size , if exceeded throws exceptions
+        max-global-session-size = 512
+        # file buffer size , if exceeded allocate new buffer
+        file-write-buffer-cache-size = 16384
+        # when recover batch read size
+        session.reload.read_size = 100
+        # async, sync
+        flush-disk-mode = async
+      }
+
+      ## database store
+      db {
+        ## the implement of javax.sql.DataSource, such as DruidDataSource(druid)/BasicDataSource(dbcp) etc.
+        datasource = &quot;dbcp&quot;
+        ## mysql/oracle/h2/oceanbase etc.
+        db-type = &quot;mysql&quot;
+        driver-class-name = &quot;com.mysql.jdbc.Driver&quot;
+        url = &quot;jdbc:mysql://127.0.0.1:3306/seata&quot;
+        user = &quot;root&quot;
+        password = &quot;root&quot;
+        min-conn = 1
+        max-conn = 3
+        global.table = &quot;global_table&quot;
+        branch.table = &quot;branch_table&quot;
+        lock-table = &quot;lock_table&quot;
+        query-limit = 100
+      }
+    }
+    lock {
+      ## the lock store mode: local、remote
+      mode = &quot;remote&quot;
+
+      local {
+        ## store locks in user&apos;s database
+      }
+
+      remote {
+        ## store locks in the seata&apos;s server
+      }
+    }
+    recovery {
+      #schedule committing retry period in milliseconds
+      committing-retry-period = 1000
+      #schedule asyn committing retry period in milliseconds
+      asyn-committing-retry-period = 1000
+      #schedule rollbacking retry period in milliseconds
+      rollbacking-retry-period = 1000
+      #schedule timeout retry period in milliseconds
+      timeout-retry-period = 1000
+    }
+
+    transaction {
+      undo.data.validation = true
+      undo.log.serialization = &quot;jackson&quot;
+      undo.log.save.days = 7
+      #schedule delete expired undo_log in milliseconds
+      undo.log.delete.period = 86400000
+      undo.log.table = &quot;undo_log&quot;
+    }
+
+    ## metrics settings
+    metrics {
+      enabled = false
+      registry-type = &quot;compact&quot;
+      # multi exporters use comma divided
+      exporter-list = &quot;prometheus&quot;
+      exporter-prometheus-port = 9898
+    }
+
+    support {
+      ## spring
+      spring {
+        # auto proxy the DataSource bean
+        datasource.autoproxy = false
+      }
+    }
+
+     ```
+
+    创建registry.conf:
+
+    ```conf
+    registry {
+      # file 、nacos 、eureka、redis、zk、consul、etcd3、sofa
+      type = &quot;nacos&quot;
+
+      nacos {
+        #serverAddr = &quot;localhost&quot;
+        serverAddr = &quot;localhost:8848&quot;
+        namespace = &quot;&quot;
+        cluster = &quot;default&quot;
+      }
+      eureka {
+        serviceUrl = &quot;http://localhost:8761/eureka&quot;
+        application = &quot;default&quot;
+        weight = &quot;1&quot;
+      }
+      redis {
+        serverAddr = &quot;localhost:6379&quot;
+        db = &quot;0&quot;
+      }
+      zk {
+        cluster = &quot;default&quot;
+        serverAddr = &quot;127.0.0.1:2181&quot;
+        session.timeout = 6000
+        connect.timeout = 2000
+      }
+      consul {
+        cluster = &quot;default&quot;
+        serverAddr = &quot;127.0.0.1:8500&quot;
+      }
+      etcd3 {
+        cluster = &quot;default&quot;
+        serverAddr = &quot;http://localhost:2379&quot;
+      }
+      sofa {
+        serverAddr = &quot;127.0.0.1:9603&quot;
+        application = &quot;default&quot;
+        region = &quot;DEFAULT_ZONE&quot;
+        datacenter = &quot;DefaultDataCenter&quot;
+        cluster = &quot;default&quot;
+        group = &quot;SEATA_GROUP&quot;
+        addressWaitTime = &quot;3000&quot;
+      }
+      file {
+        name = &quot;file.conf&quot;
+      }
+    }
+
+    config {
+      # file、nacos 、apollo、zk、consul、etcd3
+      type = &quot;file&quot;
+
+      nacos {
+        serverAddr = &quot;localhost&quot;
+        namespace = &quot;&quot;
+      }
+      consul {
+        serverAddr = &quot;127.0.0.1:8500&quot;
+      }
+      apollo {
+        app.id = &quot;seata-server&quot;
+        apollo.meta = &quot;http://192.168.1.204:8801&quot;
+      }
+      zk {
+        serverAddr = &quot;127.0.0.1:2181&quot;
+        session.timeout = 6000
+        connect.timeout = 2000
+      }
+      etcd3 {
+        serverAddr = &quot;http://localhost:2379&quot;
+      }
+      file {
+        name = &quot;file.conf&quot;
+      }
+    }
+
+    ```
+
+    ==实际上,就是要将seata中的我们之前修改的两个配置文件复制到这个项目下==
+
+3.   **主启动类**
+
+    ```java
+    @SpringBootApplication(exclude = DataSourceAutoConfiguration.class) //取消数据源的自动创建
+    @EnableDiscoveryClient
+    @EnableFeignClients
+    public class SeataOrderMain2001 {
+
+        public static void main(String[] args) {
+            SpringApplication.run(SeataOrderMain2001.class,args);
+        }
+    }
+    ```
+
+
+
+4.   **service层**
+
+     ```xml
+    public interface OrderService {
+
+        /**
+         * 创建订单
+         * @param order
+         */
+        void create(Order order);
+    }
+     ```
+
+    ```xml
+    @FeignClient(value = &quot;seata-storage-service&quot;)
+    public interface StorageService {
+
+        /**
+         * 减库存
+         * @param productId
+         * @param count
+         * @return
+         */
+        @PostMapping(value = &quot;/storage/decrease&quot;)
+        CommonResult decrease(@RequestParam(&quot;productId&quot;) Long productId, @RequestParam(&quot;count&quot;) Integer count);
+    }
+    ```
+
+    ```xml
+    @FeignClient(value = &quot;seata-account-service&quot;)
+    public interface AccountService {
+
+        /**
+         * 减余额
+         * @param userId
+         * @param money
+         * @return
+         */
+        @PostMapping(value = &quot;/account/decrease&quot;)
+        CommonResult decrease(@RequestParam(&quot;userId&quot;) Long userId, @RequestParam(&quot;money&quot;) BigDecimal money);
+    }
+
+
+
+    ```
+
+    ```xml
+    @Service
+    @Slf4j
+    public class OrderServiceImpl implements OrderService {
+
+        @Resource
+        private OrderDao orderDao;
+        @Resource
+        private AccountService accountService;
+        @Resource
+        private StorageService storageService;
+
+        /**
+         * 创建订单-&gt;调用库存服务扣减库存-&gt;调用账户服务扣减账户余额-&gt;修改订单状态
+         * 简单说:
+         * 下订单-&gt;减库存-&gt;减余额-&gt;改状态
+         * GlobalTransactional seata开启分布式事务,异常时回滚,name保证唯一即可
+         * @param order 订单对象
+         */
+        @Override
+        ///@GlobalTransactional(name = &quot;fsp-create-order&quot;, rollbackFor = Exception.class)
+        public void create(Order order) {
+            // 1 新建订单
+            log.info(&quot;-----&gt;开始新建订单&quot;);
+            orderDao.create(order);
+
+            // 2 扣减库存
+            log.info(&quot;-----&gt;订单微服务开始调用库存,做扣减Count&quot;);
+            storageService.decrease(order.getProductId(), order.getCount());
+            log.info(&quot;-----&gt;订单微服务开始调用库存,做扣减End&quot;);
+
+            // 3 扣减账户
+            log.info(&quot;-----&gt;订单微服务开始调用账户,做扣减Money&quot;);
+            accountService.decrease(order.getUserId(), order.getMoney());
+            log.info(&quot;-----&gt;订单微服务开始调用账户,做扣减End&quot;);
+
+            // 4 修改订单状态,从0到1,1代表已完成
+            log.info(&quot;-----&gt;修改订单状态开始&quot;);
+            orderDao.update(order.getUserId(), 0);
+
+            log.info(&quot;-----&gt;下订单结束了,O(∩_∩)O哈哈~&quot;);
+        }
+    }
+    ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5.   **dao层,也就是接口**
+
+    ```java
+    @Mapper
+    public interface OrderDao {
+        /**
+         * 1 新建订单
+         * @param order
+         * @return
+         */
+        int create(Order order);
+
+        /**
+         * 2 修改订单状态,从0改为1
+         * @param userId
+         * @param status
+         * @return
+         */
+        int update(@Param(&quot;userId&quot;) Long userId, @Param(&quot;status&quot;) Integer status);
+    }
+    ```
+
+     ==在resource下创建mapper文件夹,编写mapper.xml==
+
+    ```xml
+    &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+    &lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+            &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+    &lt;mapper namespace=&quot;com.eiletxie.springcloud.alibaba.dao.OrderDao&quot;&gt;
+
+        &lt;resultMap id=&quot;BaseResultMap&quot; type=&quot;com.eiletxie.springcloud.alibaba.domain.Order&quot;&gt;
+            &lt;id column=&quot;id&quot; property=&quot;id&quot; jdbcType=&quot;BIGINT&quot;&gt;&lt;/id&gt;
+            &lt;result column=&quot;user_id&quot; property=&quot;userId&quot; jdbcType=&quot;BIGINT&quot;&gt;&lt;/result&gt;
+            &lt;result column=&quot;product_id&quot; property=&quot;productId&quot; jdbcType=&quot;BIGINT&quot;&gt;&lt;/result&gt;
+            &lt;result column=&quot;count&quot; property=&quot;count&quot; jdbcType=&quot;INTEGER&quot;&gt;&lt;/result&gt;
+            &lt;result column=&quot;money&quot; property=&quot;money&quot; jdbcType=&quot;DECIMAL&quot;&gt;&lt;/result&gt;
+            &lt;result column=&quot;status&quot; property=&quot;status&quot; jdbcType=&quot;INTEGER&quot;&gt;&lt;/result&gt;
+        &lt;/resultMap&gt;
+
+        &lt;insert id=&quot;create&quot; parameterType=&quot;com.eiletxie.springcloud.alibaba.domain.Order&quot; useGeneratedKeys=&quot;true&quot;
+                keyProperty=&quot;id&quot;&gt;
+            insert into t_order(user_id,product_id,count,money,status) values (#{userId},#{productId},#{count},#{money},0);
+        &lt;/insert&gt;
+
+        &lt;update id=&quot;update&quot;&gt;
+            update t_order set status =1 where user_id =#{userId} and status=#{status};
+       &lt;/update&gt;
+    &lt;/mapper&gt;
+
+    ```
+
+6.   **controller层**
+
+    ```java
+    @RestController
+    public class OrderController {
+        @Resource
+        private OrderService orderService;
+
+
+        /**
+         * 创建订单
+         *
+         * @param order
+         * @return
+         */
+        @GetMapping(&quot;/order/create&quot;)
+        public CommonResult create(Order order) {
+            orderService.create(order);
+            return new CommonResult(200, &quot;订单创建成功&quot;);
+        }
+
+
+    }
+    ```
+
+
+
+7.   **entity类(也叫domain类)**
+
+     ```java
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public class CommonResult&lt;T&gt; {
+        private Integer code;
+        private String message;
+        private T data;
+
+        public CommonResult(Integer code, String message) {
+            this(code, message, null);
+        }
+    }
+
+     ```
+
+    ![](C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的12.png)
+
+
+
+
+
+
+
+8.   config配置类
+
+    ```java
+    @Configuration
+    @MapperScan({&quot;com.eiletxie.springcloud.alibaba.dao&quot;})        指定我们的接口的位置
+    public class MyBatisConfig {
+
+
+    }
+
+
+
+    ```
+
+    ```java
+
+
+    /**
+     * @Author EiletXie
+     * @Since 2020/3/18 21:51
+     * 使用Seata对数据源进行代理
+     */
+    @Configuration
+    public class DataSourceProxyConfig {
+
+        @Value(&quot;${mybatis.mapperLocations}&quot;)
+        private String mapperLocations;
+
+        @Bean
+        @ConfigurationProperties(prefix = &quot;spring.datasource&quot;)
+        public DataSource druidDataSource() {
+            return new DruidDataSource();
+        }
+
+        @Bean
+        public DataSourceProxy dataSourceProxy(DataSource druidDataSource) {
+            return new DataSourceProxy(druidDataSource);
+        }
+
+        @Bean
+        public SqlSessionFactory sqlSessionFactoryBean(DataSourceProxy dataSourceProxy) throws Exception {
+            SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+            bean.setDataSource(dataSourceProxy);
+            ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+            bean.setMapperLocations(resolver.getResources(mapperLocations));
+            return bean.getObject();
+        }
+    }
+
+
+
+    ```
+
+
+
+9.   
+
+10.   
+
+11.  
+
+  ==库存==,seta-storage-2002
+
+**==看脑图==**
+
+1.    pom   
+2.   配置文件
+3.   主启动类
+4.    service层
+5.    dao层
+6.    controller层
+7.   
+8.   
+
+
+
+ ==账号==,seta-account-2003
+
+**==看脑图==**
+
+1.    pom     
+2.   配置文件
+3.   主启动类
+4.   service层
+5.    dao层
+6.   controller层
+7.   
+8.   
+</code></pre><ol start="5">
+<li><p><strong>全局创建完成后,首先测试不加seata</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的14.png" alt=""></p>
+</li>
+</ol>
+<pre><code>![](C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的13.png)
+</code></pre><ol start="6">
+<li><p>使用seata:</p>
+<p><strong>在==订单模块==的serviceImpl类中的==create方法==添加启动分布式事务的注解</strong></p>
+<pre><code class="java"><span class="comment">/**</span>
+<span class="comment">   这里添加开启分布式事务的注解,name指定当前全局事务的名称</span>
+<span class="comment">   rollbackFor表示,发生什么异常需要回滚</span>
+<span class="comment">   noRollbackFor:表示,发生什么异常不需要回滚</span>
+<span class="comment">*/</span>
+<span class="meta">@GlobalTransactional</span>(name = <span class="string">"fsp-create-order"</span>,rollbackFor = Exception.class)
+<span class="comment">///@GlobalTransactional(name = "fsp-create-order", rollbackFor = Exception.class)</span>
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">create</span><span class="params">(Order order)</span> </span>{
+   <span class="comment">// 1 新建订单</span>
+   log.info(<span class="string">"-----&gt;开始新建订单"</span>);
+   orderDao.create(order);
+
+   <span class="comment">// 2 扣减库存</span>
+   log.info(<span class="string">"-----&gt;订单微服务开始调用库存,做扣减Count"</span>);
+   storageService.decrease(order.getProductId(), order.getCount());
+   log.info(<span class="string">"-----&gt;订单微服务开始调用库存,做扣减End"</span>);
+
+   <span class="comment">// 3 扣减账户</span>
+   log.info(<span class="string">"-----&gt;订单微服务开始调用账户,做扣减Money"</span>);
+   accountService.decrease(order.getUserId(), order.getMoney());
+   log.info(<span class="string">"-----&gt;订单微服务开始调用账户,做扣减End"</span>);
+
+   <span class="comment">// 4 修改订单状态,从0到1,1代表已完成</span>
+   log.info(<span class="string">"-----&gt;修改订单状态开始"</span>);
+   orderDao.update(order.getUserId(), <span class="number">0</span>);
+
+   log.info(<span class="string">"-----&gt;下订单结束了,O(∩_∩)O哈哈~"</span>);
+}
+
+</code></pre>
+</li>
+</ol>
+<ol start="7">
+<li><p>此时在测试</p>
+<p>发现,发生异常后,直接回滚了,前面的修改操作都回滚了</p>
+</li>
+</ol>
+<h3 id="setat原理"><a href="#setat原理" class="headerlink" title="setat原理:"></a>setat原理:</h3><p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的15.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的16.png" alt=""></p>
+<p><strong>seata提供了四个模式:</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的17.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的18.png" alt=""></p>
+<p>==第一阶段:==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的20.png" alt=""></p>
+<p>​    <img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的19.png" alt=""></p>
+<p>==二阶段之提交==:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的21.png" alt=""></p>
+<p>==二阶段之回滚:==</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的22.png" alt=""></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的23.png" alt=""></p>
+<p>==断点==:</p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的24.png" alt=""></p>
+<p><strong>可以看到,他们的xid全局事务id是一样的,证明他们在一个事务下</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的25.png" alt=""></p>
+<p><strong>before 和 after的原理就是</strong></p>
+<p><img src="C:\Users\陈超\Desktop\Linux\springboot+cloud\springcloud\seala的26.png" alt=""></p>
+<p><strong>在更新数据之前,先解析这个更新sql,然后查询要更新的数据,进行保存</strong></p>
