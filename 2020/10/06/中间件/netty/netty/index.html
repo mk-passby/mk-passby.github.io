@@ -89,7 +89,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#netty说明"><span class="toc-text">netty说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reactor线程模型"><span class="toc-text">Reactor线程模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单Reactor单线程"><span class="toc-text">单Reactor单线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单Reactor多线程"><span class="toc-text">单Reactor多线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主从-Reactor-多线程"><span class="toc-text">主从 Reactor 多线程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Netty模型"><span class="toc-text">Netty模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Netty核心组件"><span class="toc-text">Netty核心组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#bootStrap，serverBootStrap"><span class="toc-text">bootStrap，serverBootStrap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Future、ChannelFuture"><span class="toc-text">Future、ChannelFuture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Channel"><span class="toc-text">Channel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selector"><span class="toc-text">Selector</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ChannelHandler及其实现类"><span class="toc-text">ChannelHandler及其实现类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pipeline和ChannelPipeline"><span class="toc-text">Pipeline和ChannelPipeline</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ChannelHandlerContext"><span class="toc-text">ChannelHandlerContext</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ChannelOption"><span class="toc-text">ChannelOption</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EventLoopGroup和其实现类NioEventLoopGroup"><span class="toc-text">EventLoopGroup和其实现类NioEventLoopGroup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unpooled类"><span class="toc-text">Unpooled类</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#netty说明"><span class="toc-text">netty说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reactor线程模型"><span class="toc-text">Reactor线程模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单Reactor单线程"><span class="toc-text">单Reactor单线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单Reactor多线程"><span class="toc-text">单Reactor多线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主从-Reactor-多线程"><span class="toc-text">主从 Reactor 多线程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Netty模型"><span class="toc-text">Netty模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Netty核心组件"><span class="toc-text">Netty核心组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#bootStrap，serverBootStrap"><span class="toc-text">bootStrap，serverBootStrap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Future、ChannelFuture"><span class="toc-text">Future、ChannelFuture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Channel"><span class="toc-text">Channel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selector"><span class="toc-text">Selector</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ChannelHandler及其实现类"><span class="toc-text">ChannelHandler及其实现类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pipeline和ChannelPipeline"><span class="toc-text">Pipeline和ChannelPipeline</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ChannelHandlerContext"><span class="toc-text">ChannelHandlerContext</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ChannelOption"><span class="toc-text">ChannelOption</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EventLoopGroup和其实现类NioEventLoopGroup"><span class="toc-text">EventLoopGroup和其实现类NioEventLoopGroup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unpooled类"><span class="toc-text">Unpooled类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编码和解码"><span class="toc-text">编码和解码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Netty-提供的编码器"><span class="toc-text">Netty 提供的编码器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他编码器"><span class="toc-text">其他编码器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Protobuf"><span class="toc-text">Protobuf</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Netty的handler链的调用机制"><span class="toc-text">Netty的handler链的调用机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-粘包和拆包基本介绍"><span class="toc-text">TCP 粘包和拆包基本介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#现象实例"><span class="toc-text">现象实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于netty实现的简易Dubbo"><span class="toc-text">基于netty实现的简易Dubbo</span></a></li></ol>
 </div>
     
 </div>
@@ -300,6 +300,56 @@
 <ol start="3">
 <li>举例说明Unpooled 获取 Netty的数据容器ByteBuf 的基本使用 【案例演示】</li>
 </ol>
+<h2 id="编码和解码"><a href="#编码和解码" class="headerlink" title="编码和解码"></a>编码和解码</h2><ul>
+<li>写网络应用程序时，因为数据在网络中传输的都是二进制字节码数据，在发送数据时就需要编码，接收数据时就需要解码。</li>
+<li>codec(编解码器) 的组成部分有两个：decoder(解码器)和 encoder(编码器)。encoder 负责把业务数据转换成字节码数据，decoder 负责把字节码数据转换成业务数据</li>
+</ul>
+<h3 id="Netty-提供的编码器"><a href="#Netty-提供的编码器" class="headerlink" title="Netty 提供的编码器"></a>Netty 提供的编码器</h3><ul>
+<li><p>StringEncoder，对字符串数据进行编码</p>
+</li>
+<li><p>ObjectEncoder，对 Java 对象进行编码</p>
+<ul>
+<li>netty提供的 ObjectDecoder 和 ObjectEncoder 可以用来实现 POJO 对象或各种业务对象的编码和解码，底层使用的仍是 Java 序列化技术 。注意序列化的缺点是什么？1.无法跨语言，2.序列化后体积太大，是二进制编码的五倍多，3.序列化性能太低</li>
+</ul>
+</li>
+</ul>
+<h3 id="其他编码器"><a href="#其他编码器" class="headerlink" title="其他编码器"></a>其他编码器</h3><ul>
+<li><p>LineBasedFrameDecoder：这个类在Netty内部也有使用，它使用行尾控制字符（\n或者\r\n）作为分隔符来解析数据。</p>
+</li>
+<li><p>DelimiterBasedFrameDecoder：使用自定义的特殊字符作为消息的分隔符。</p>
+</li>
+<li><p>HttpObjectDecoder：一个HTTP数据的解码器</p>
+</li>
+<li>LengthFieldBasedFrameDecoder：通过指定长度来标识整包消息，这样就可以自动的处理黏包和半包消息。</li>
+</ul>
+<h3 id="Protobuf"><a href="#Protobuf" class="headerlink" title="Protobuf"></a>Protobuf</h3><p>1) Protobuf 是 Google 发布的开源项目，全称 Google Protocol Buffers，是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC[远程过程调用 remote procedure call ] 数据交换格式 。<br> 目前很多公司 http+json è tcp+protobuf</p>
+<p>2) 参考文档 : <a href="https://developers.google.com/protocol-buffers/docs/proto" target="_blank" rel="noopener">https://</a><a href="https://developers.google.com/protocol-buffers/docs/proto" target="_blank" rel="noopener">developers.google.com/protocol-buffers/docs/proto</a>   语言指南</p>
+<p>3) Protobuf 是以 message 的方式来管理数据的.</p>
+<p>4) 支持跨平台、跨语言，即[客户端和服务器端可以是不同的语言编写的] （<strong>支持目前绝大多数语言</strong>，例如 C++、C#、Java、python 等）</p>
+<p>5)高性能，高可靠性</p>
+<p>6)使用 protobuf 编译器能自动生成代码，Protobuf 是将类的定义使用.proto 文件进行描述。说明，在idea 中编写 .proto 文件时，会自动提示是否下载 .ptotot 编写插件. 可以让语法高亮。</p>
+<p>7)然后通过 protoc.exe 编译器根据.proto 自动生成.java 文件</p>
+<h2 id="Netty的handler链的调用机制"><a href="#Netty的handler链的调用机制" class="headerlink" title="Netty的handler链的调用机制"></a>Netty的handler链的调用机制</h2><p>ChannelHandler充当了处理入站和出站数据的应用程序逻辑的容器。例如，实现ChannelInboundHandler接口（或ChannelInboundHandlerAdapter），你就可以接收入站事件和数据，这些数据会被业务逻辑处理。当要给客户端发送响应时，也可以从ChannelInboundHandler冲刷数据。业务逻辑通常写在一个或者多个ChannelInboundHandler中。ChannelOutboundHandler原理一样，只不过它是用来处理出站数据的</p>
+<p><img src="/2020/10/06/中间件/netty/netty/handler链.png" alt=""></p>
+<h2 id="TCP-粘包和拆包基本介绍"><a href="#TCP-粘包和拆包基本介绍" class="headerlink" title="TCP 粘包和拆包基本介绍"></a>TCP 粘包和拆包基本介绍</h2><p>1)TCP是面向连接的，面向流的，提供高可靠性服务。收发两端（客户端和服务器端）都要有一一成对的socket，因此，发送端为了将多个发给接收端的包，更有效的发给对方，使用了优化方法（Nagle算法），将多次间隔较小且数据量小的数据，合并成一个大的数据块，然后进行封包。这样做虽然提高了效率，但是接收端就难于分辨出完整的数据包了，因为面向流的通信是无消息保护边界的</p>
+<p>2)由于TCP无消息保护边界, 需要在接收端处理消息边界问题，也就是我们所说的粘包、拆包问题, 看一张图</p>
+<p><img src="/2020/10/06/中间件/netty/netty/TCP粘拆包.png" alt=""></p>
+<p>假设客户端分别发送了两个数据包D1和D2给服务端，由于服务端一次读取到字节数是不确定的，故可能存在以下四种情况：</p>
+<ul>
+<li><p>1)服务端分两次读取到了两个独立的数据包，分别是D1和D2，没有粘包和拆包</p>
+</li>
+<li><p>2)服务端一次接受到了两个数据包，D1和D2粘合在一起，称之为TCP粘包</p>
+</li>
+<li><p>3)服务端分两次读取到了数据包，第一次读取到了完整的D1包和D2包的部分内容，第二次读取到了D2包的剩余内容，这称之为TCP拆包</p>
+</li>
+<li><p>4)服务端分两次读取到了数据包，第一次读取到了D1包的部分内容D1_1，第二次读取到了D1包的剩余部分内容D1_2和完整的D2包。</p>
+</li>
+</ul>
+<h3 id="现象实例"><a href="#现象实例" class="headerlink" title="现象实例"></a>现象实例</h3><p><a href="https://github.com/mk-passby/mk_learn/tree/master/netty/src/main/java/com/mk/learn/netty/tcp" target="_blank" rel="noopener">https://github.com/mk-passby/mk_learn/tree/master/netty/src/main/java/com/mk/learn/netty/tcp</a></p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>1)使用自定义协议 + 编解码器 来解决</p>
+<p>2)关键就是要解决 服务器端每次读取数据长度的问题, 这个问题解决，就不会出现服务器多读或少读数据的问题，从而避免的TCP 粘包、拆包 。</p>
+<p><a href="https://github.com/mk-passby/mk_learn/tree/master/netty/src/main/java/com/mk/learn/netty/protocaltcp" target="_blank" rel="noopener">https://github.com/mk-passby/mk_learn/tree/master/netty/src/main/java/com/mk/learn/netty/protocaltcp</a></p>
+<h2 id="基于netty实现的简易Dubbo"><a href="#基于netty实现的简易Dubbo" class="headerlink" title="基于netty实现的简易Dubbo"></a>基于netty实现的简易Dubbo</h2><p><a href="https://github.com/mk-passby/mk_learn/tree/master/netty/src/main/java/com/mk/learn/dubborpc" target="_blank" rel="noopener">https://github.com/mk-passby/mk_learn/tree/master/netty/src/main/java/com/mk/learn/dubborpc</a></p>
 
         
         <br />
