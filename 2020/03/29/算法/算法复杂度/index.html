@@ -89,7 +89,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#算法复杂度"><span class="toc-text">算法复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-怎么分析算法复杂度"><span class="toc-text">1.怎么分析算法复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、时间复杂度"><span class="toc-text">一、时间复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、空间复杂度"><span class="toc-text">二、空间复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3）算法稳定性"><span class="toc-text">3）算法稳定性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-最好，最坏，平均，均摊时间复杂度"><span class="toc-text">2.最好，最坏，平均，均摊时间复杂度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-常见的时间复杂度"><span class="toc-text">3.常见的时间复杂度</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#算法复杂度"><span class="toc-text">算法复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-怎么分析算法复杂度"><span class="toc-text">1.怎么分析算法复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、时间复杂度"><span class="toc-text">一、时间复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#常量阶O-1"><span class="toc-text">常量阶O(1)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#对数阶O-log-2-n"><span class="toc-text">对数阶O(log~2~n)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#线性阶O-n"><span class="toc-text">线性阶O(n)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#线性对数阶O-nlog-2-N"><span class="toc-text">线性对数阶O(nlog~2~N)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#平方阶O-n²"><span class="toc-text">平方阶O(n²)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、空间复杂度"><span class="toc-text">二、空间复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3）算法稳定性"><span class="toc-text">3）算法稳定性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-最好，最坏，平均，均摊时间复杂度"><span class="toc-text">2.最好，最坏，平均，均摊时间复杂度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-常见的时间复杂度"><span class="toc-text">3.常见的时间复杂度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-算法复杂度的比较"><span class="toc-text">4.算法复杂度的比较</span></a></li></ol>
 </div>
     
 </div>
@@ -127,7 +127,7 @@
         
         <span class="attr">标签：/
         
-        <a class="tag" href="/tags/#算法" title="算法">算法</a>
+        <a class="tag" href="/tags/#数据结构和算法" title="数据结构和算法">数据结构和算法</a>
         <span>/</span>
         
         
@@ -144,6 +144,22 @@
 <li>n：数据规模大小</li>
 <li>f(n)：每行代码执行的次数总和</li>
 </ul>
+<h5 id="常量阶O-1"><a href="#常量阶O-1" class="headerlink" title="常量阶O(1)"></a>常量阶O(1)</h5><p>无论代码执行了多少行，只要是没有循环等复杂结构，那这个代码的时间复杂度就都是O(1)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i=<span class="number">6</span>;</span><br><span class="line">    <span class="keyword">int</span> j=<span class="number">5</span>;</span><br><span class="line">    ++i;</span><br><span class="line">    j++;</span><br><span class="line">    <span class="keyword">int</span> x=i+j;</span><br></pre></td></tr></table></figure>
+<p>代码在执行的时候，它消耗的时候并不随着某个变量的增长而增长，那么无论这类代码有多长，即使有几万几十万行，都可以用O(1)来表示它的时间复杂度。</p>
+<h5 id="对数阶O-log-2-n"><a href="#对数阶O-log-2-n" class="headerlink" title="对数阶O(log~2~n)"></a>对数阶O(log~2~n)</h5><ul>
+<li>在while循环里面，每次都将 i 乘以 2，乘完之后，i 距离 n 就越来越近了。假设循环x次之后，i 就大于 2 了，此时这个循环就退出了，也就是说 2 的 x 次方等于 n，那么 x = log~2~n也就是说当循环 log~2~n 次以后，这个代码就结束了。因此这个代码的时间复杂度为：O(log~2~n)  。 O(log~2~n) 的这个2 时间上是根据代码变化的，i = i * 3 ，则是 O(log~3~n) .</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (i&lt;n)&#123;</span><br><span class="line">      i=i*<span class="number">2</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="线性阶O-n"><a href="#线性阶O-n" class="headerlink" title="线性阶O(n)"></a>线性阶O(n)</h5><ul>
+<li>for循环里面的代码会执行n遍，因此它消耗的时间是随着n的变化而变化的，因此这类代码都可以用O(n)来表示它的时间复杂度</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">         i++;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="线性对数阶O-nlog-2-N"><a href="#线性对数阶O-nlog-2-N" class="headerlink" title="线性对数阶O(nlog~2~N)"></a>线性对数阶O(nlog~2~N)</h5><p>O(log~2~n)的代码执行n次，即是nlog~2~N。原理就是一个嵌套循环</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> m=<span class="number">1</span>; m &lt; n; m++) &#123;</span><br><span class="line">          i=<span class="number">1</span>;</span><br><span class="line">          <span class="keyword">while</span> (i&lt;n)&#123;</span><br><span class="line">              i=i*<span class="number">2</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="平方阶O-n²"><a href="#平方阶O-n²" class="headerlink" title="平方阶O(n²)"></a>平方阶O(n²)</h5><p>嵌套for循环，单层for循环是O(n)，嵌套为O(n^2^)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">         <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">             a++;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h5><p>立方阶O(n³)、K次方阶O(n^k^)类似，也只是一堆基础的嵌套而已</p>
 <hr>
 <p><strong>时间复杂度分析</strong></p>
 <ul>
@@ -181,6 +197,19 @@
 <li>均摊时间复杂度：在代码执行的所有复杂度情况中，大部分情况下时间复杂度都很低，只有极个别情况下的时间复杂度比较高，而且发生具有<strong>前后连贯的时序关系</strong>时，可以将个别高级别复杂度均摊到低级别复杂度上。均摊结果一般都等于<strong>低级别复杂度</strong></li>
 </ul>
 <h1 id="3-常见的时间复杂度"><a href="#3-常见的时间复杂度" class="headerlink" title="3.常见的时间复杂度"></a>3.常见的时间复杂度</h1><p><img src="/2020/03/29/算法/算法复杂度/1.png" alt="时间复杂度"></p>
+<h1 id="4-算法复杂度的比较"><a href="#4-算法复杂度的比较" class="headerlink" title="4.算法复杂度的比较"></a>4.算法复杂度的比较</h1><p>1)常数阶O(1)</p>
+<p>2)对数阶O(log~2~n)</p>
+<p>3)线性阶O(n)</p>
+<p>4)线性对数阶O(nlog~2~n)</p>
+<p>5)平方阶O(n^2^)   </p>
+<p>6)立方阶O(n^3^)</p>
+<p>7)k次方阶O(n^k^)</p>
+<p>8)指数阶O(2^n^)</p>
+<p><img src="/2020/03/29/算法/算法复杂度/2.png" alt=""></p>
+<ul>
+<li>常见的算法时间复杂度由小到大依次为：Ο(1)＜Ο(log~2~n)＜Ο(n)＜Ο(nlog~2~n)＜Ο(n^2^)＜Ο(n^3^)＜ Ο(n^k^) ＜Ο(2^n^) ，随着问题规模n的不断增大，上述时间复杂度不断增大，算法的执行效率越低</li>
+<li>从图中可见，我们应该尽可能<strong>避免使用指数阶的算法</strong></li>
+</ul>
 
         
         <br />

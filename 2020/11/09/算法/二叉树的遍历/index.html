@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="mk-passby的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        常见算法排序 - mk-passby的博客 | mk-passby&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 我想回头望  把故事从头讲~ </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>mk-passby</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#遍历方式"><span class="toc-text">遍历方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#递归实现前序遍历"><span class="toc-text">递归实现前序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#递归实现中序遍历"><span class="toc-text">递归实现中序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#递归实现后序遍历"><span class="toc-text">递归实现后序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非递归实现"><span class="toc-text">非递归实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#前序遍历"><span class="toc-text">前序遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#中序遍历"><span class="toc-text">中序遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#后续遍历"><span class="toc-text">后续遍历</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> 我想回头望  把故事从头讲~ </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        常见算法排序
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-11-09 20:44:00</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#数据结构和算法" title="数据结构和算法">数据结构和算法</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h2 id="遍历方式"><a href="#遍历方式" class="headerlink" title="遍历方式"></a>遍历方式</h2><p> 二叉树的遍历<br>       1<br>      / \<br>     2   3<br>    /\    \<br>   4  5    6<br>       /\<br>     7  8<br>  前序:根结点 —&gt; 左子树 —&gt; 右子树   12457836<br>  中序:左子树—&gt; 根结点 —&gt; 右子树    42758136<br>  后序:左子树 —&gt; 右子树 —&gt; 根结点   47852631<br>  层次遍历：1  2  3  4  5  6  7 8</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>定义一个简单的二叉树结构</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span> </span>&#123;</span><br><span class="line">    TreeNode left;</span><br><span class="line">    TreeNode right;</span><br><span class="line">    Integer value;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TreeNode</span><span class="params">(TreeNode left, TreeNode right, Integer value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.left = left;</span><br><span class="line">        <span class="keyword">this</span>.right = right;</span><br><span class="line">        <span class="keyword">this</span>.value = value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="递归实现前序遍历"><a href="#递归实现前序遍历" class="headerlink" title="递归实现前序遍历"></a>递归实现前序遍历</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">preOrderTraverse1</span><span class="params">(TreeNode treeNode)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (treeNode != <span class="keyword">null</span>) &#123; </span><br><span class="line">            System.out.println(treeNode.value);</span><br><span class="line">            preOrderTraverse1(treeNode.left);</span><br><span class="line">            preOrderTraverse1(treeNode.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="递归实现中序遍历"><a href="#递归实现中序遍历" class="headerlink" title="递归实现中序遍历"></a>递归实现中序遍历</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">middleOrderTraverse1</span><span class="params">(TreeNode treeNode)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (treeNode != <span class="keyword">null</span>) &#123;</span><br><span class="line">            middleOrderTraverse1(treeNode.left);</span><br><span class="line">            System.out.println(treeNode.value);</span><br><span class="line">            middleOrderTraverse1(treeNode.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="递归实现后序遍历"><a href="#递归实现后序遍历" class="headerlink" title="递归实现后序遍历"></a>递归实现后序遍历</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">afterOrderTraverse1</span><span class="params">(TreeNode treeNode)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (treeNode != <span class="keyword">null</span>) &#123;</span><br><span class="line">            afterOrderTraverse1(treeNode.left);</span><br><span class="line">            afterOrderTraverse1(treeNode.right);</span><br><span class="line">            System.out.println(treeNode.value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="非递归实现"><a href="#非递归实现" class="headerlink" title="非递归实现"></a>非递归实现</h3><p>非递归则需要我们保存部分数据，这里需要使用到栈这种数据结构</p>
+<h4 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h4><p>将右节点存储到栈中，依次取出就行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">preOrderTraverse2</span><span class="params">(TreeNode treeNode)</span> </span>&#123;</span><br><span class="line">       Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack();</span><br><span class="line">       TreeNode pNode = treeNode;</span><br><span class="line">       <span class="keyword">while</span> (pNode != <span class="keyword">null</span> || !stack.isEmpty()) &#123;</span><br><span class="line">           <span class="keyword">if</span> (pNode != <span class="keyword">null</span>) &#123;</span><br><span class="line">               System.out.print(pNode.value + <span class="string">"  "</span>);</span><br><span class="line">               stack.push(pNode);</span><br><span class="line">               pNode = pNode.left;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">else</span> &#123; <span class="comment">//pNode == null &amp;&amp; !stack.isEmpty()</span></span><br><span class="line">               TreeNode node = stack.pop();</span><br><span class="line">               pNode = node.right;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h4><p>同前序遍历</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">middleOrderTraverse2</span><span class="params">(TreeNode treeNode)</span> </span>&#123;</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack();</span><br><span class="line">        TreeNode pNode = treeNode;</span><br><span class="line">        <span class="keyword">while</span> (pNode != <span class="keyword">null</span> || !stack.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (pNode != <span class="keyword">null</span>) &#123;</span><br><span class="line">                stack.push(pNode);</span><br><span class="line">                pNode = pNode.left;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123; <span class="comment">//pNode == null &amp;&amp; !stack.isEmpty()</span></span><br><span class="line">                TreeNode node = stack.pop();</span><br><span class="line">                System.out.print(node.value + <span class="string">"  "</span>);</span><br><span class="line">                pNode = node.right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="后续遍历"><a href="#后续遍历" class="headerlink" title="后续遍历"></a>后续遍历</h4><p>利用反转，为了得到”左-&gt;右-&gt;根”，先得到”根-&gt;右-&gt;左”</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">afterOrderTraverse2</span><span class="params">(TreeNode treeNode)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack();</span><br><span class="line">        stack.push(treeNode);</span><br><span class="line">        <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">            TreeNode treeNodeStack = stack.pop();</span><br><span class="line">            <span class="keyword">if</span> (treeNodeStack != <span class="keyword">null</span>) &#123;</span><br><span class="line">                System.out.println(treeNodeStack.value);</span><br><span class="line">                list.add(treeNodeStack.value);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (treeNodeStack.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">                stack.push(treeNodeStack.left);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (treeNodeStack.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">                stack.push(treeNodeStack.right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        Collections.reverse(list);</span><br><span class="line">        System.out.println(Arrays.toString(list.toArray()));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>代码位置</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/mk-passby">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+
+
+</html>

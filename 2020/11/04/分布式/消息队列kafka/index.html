@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="mk-passby的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        分布式消息队列kafka - mk-passby的博客 | mk-passby&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 我想回头望  把故事从头讲~ </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>mk-passby</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么用消息队列？"><span class="toc-text">为什么用消息队列？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主流MQ比较"><span class="toc-text">主流MQ比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kafka架构"><span class="toc-text">kafka架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#术语解释"><span class="toc-text">术语解释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Topics和日志"><span class="toc-text">Topics和日志</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kafka的高可用"><span class="toc-text">kafka的高可用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何保证消息不被重复消费的幂等性？？"><span class="toc-text">如何保证消息不被重复消费的幂等性？？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何处理消息丢失？"><span class="toc-text">如何处理消息丢失？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何保证消息的顺序性"><span class="toc-text">如何保证消息的顺序性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#写一个消息队列，该如何进行架构设计"><span class="toc-text">写一个消息队列，该如何进行架构设计</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> 我想回头望  把故事从头讲~ </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        分布式消息队列kafka
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-11-04 21:40:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#分布式" title="分布式">分布式</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#消息队列" title="消息队列">消息队列</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h2 id="为什么用消息队列？"><a href="#为什么用消息队列？" class="headerlink" title="为什么用消息队列？"></a>为什么用消息队列？</h2><p>什么业务场景？有什么难点？用了消息队列解决了什么问题，带来了什么好处？</p>
+<ul>
+<li><p>消息队列的优点</p>
+<ul>
+<li>解耦</li>
+<li>异步</li>
+<li>削峰</li>
+</ul>
+</li>
+<li><p>消息队列的缺点</p>
+<ul>
+<li>系统整体更复杂了，多引入了一个服务</li>
+<li>系统的可用性更差了，因为需要关注MQ的服务健康情况</li>
+<li>一致性问题，数据各个调用的一致性问题。类似事务的一致性问题</li>
+</ul>
+</li>
+</ul>
+<h2 id="主流MQ比较"><a href="#主流MQ比较" class="headerlink" title="主流MQ比较"></a>主流MQ比较</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">特性</th>
+<th>ActiveMQ</th>
+<th>RabbitMQ</th>
+<th>RocketMQ</th>
+<th>kafka</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">开发语言</td>
+<td>java</td>
+<td>erlang</td>
+<td>java</td>
+<td>scala</td>
+</tr>
+<tr>
+<td style="text-align:left">单机吞吐量</td>
+<td>万级</td>
+<td>万级</td>
+<td>10万级</td>
+<td>10万级</td>
+</tr>
+<tr>
+<td style="text-align:left">时效性</td>
+<td>ms级</td>
+<td>us级</td>
+<td>ms级</td>
+<td>ms级以内</td>
+</tr>
+<tr>
+<td style="text-align:left">可用性</td>
+<td>高(主从架构)</td>
+<td>高(主从架构)</td>
+<td>非常高(分布式架构)</td>
+<td>非常高(分布式架构)</td>
+</tr>
+<tr>
+<td style="text-align:left">功能特性</td>
+<td>成熟的产品，在很多公司得到应用；有较多的文档；各种协议支持较好</td>
+<td>基于erlang开发，所以并发能力很强，性能极其好，延时很低;管理界面较丰富</td>
+<td>MQ功能比较完备，扩展性佳</td>
+<td>只支持主要的MQ功能，像一些消息查询，消息回溯等功能没有提供，毕竟是为大数据准备的，在大数据领域应用广。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="kafka架构"><a href="#kafka架构" class="headerlink" title="kafka架构"></a>kafka架构</h2><h3 id="术语解释"><a href="#术语解释" class="headerlink" title="术语解释"></a>术语解释</h3><ul>
+<li>broker：缓存代理，Kafka集群中的一台或多台服务器统称broker。</li>
+<li>topic：kafka给消息提供的分类方式。broker用来存储不同topic的消息数据。</li>
+<li>producer：往broker中某个topic里面生产数据。</li>
+<li>consumer：从broker中某个topic获取数据。</li>
+<li>Partition: Topic物理上的分组，一个topic可以分为多个partion,每个partion是一个有序的队列。partion中每条消息都会被分配一个有序的Id(offset)</li>
+</ul>
+<h3 id="Topics和日志"><a href="#Topics和日志" class="headerlink" title="Topics和日志"></a>Topics和日志</h3><p>对于每一个topic， Kafka集群都会维持一个分区日志，如下所示：</p>
+<p><img src="/2020/11/04/分布式/消息队列kafka/topic.png" alt=""></p>
+<p>每个分区都是有序且顺序不可变的记录集，并且不断地追加到结构化的commit log文件。分区中的每一个记录都会分配一个id号来表示顺序，我们称之为offset，<em>offset</em>用来唯一的标识分区中每一条记录。注意，这里的offset同时也记录了消息的位置，我们每次读取的时候就从offset的位置读取就行，所以效率高</p>
+<h2 id="kafka的高可用"><a href="#kafka的高可用" class="headerlink" title="kafka的高可用"></a>kafka的高可用</h2><p><img src="/2020/11/04/分布式/消息队列kafka/kafka集群.png" alt=""></p>
+<ul>
+<li><p>该图(注意最下面的一行应该为topic1_part2，由于网上找的图，没做修改)展示了，一个topic，可能被拆分成了多个partition，存放在不同的broker上。如topic1，被拆分成了topic1-part0，topic1-part1，topic1-part2。</p>
+</li>
+<li><p>传统的设计：如果我们要实现分区，可能会将三台机器每台存放1/3的数据，但是如果机器宕机了，就等于我们丢失了1/3的，有1/3的数据无法访问</p>
+</li>
+<li>Kafka 0.8 以后，提供了 HA 机制，就是 replicas（复制品） 副本机制。所有 replicas会选举一个 leader 出来，那么生产和消费都跟这个 leader 打交道。其他的replicas多个broker持有相同的partition，如图Broker1,Broker2,Broker3都持有topic1-part0<ul>
+<li>写的时候，生产者写数据到leader(红色背景)，leader将数据落盘，follower主动从leader这里pull数据，数据同步完成后，发送ack给leader，所有follower处理完成后，leader返回成功消息给生产者</li>
+<li>读的时候直接读取leader的数据就可以，但是需要当前的消息被所有follower同步成功后才能读到。</li>
+<li>如果broker宕机了，数据在其他broker还有复制，会重新选举leader，继续服务。</li>
+<li><strong>读写都能在在leader上操作吗？</strong><ul>
+<li>是的，要是可以在多个 follower操作，就又要考虑数据一致性的问题，更麻烦</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="如何保证消息不被重复消费的幂等性？？"><a href="#如何保证消息不被重复消费的幂等性？？" class="headerlink" title="如何保证消息不被重复消费的幂等性？？"></a>如何保证消息不被重复消费的幂等性？？</h2><ul>
+<li><p>首先得明白什么是幂等</p>
+<ul>
+<li>一个请求，重复多次执行，产生的结果不变。</li>
+</ul>
+</li>
+<li><p>kafka怎么产生幂等性问题的</p>
+<ul>
+<li>kafka有offset的记录，每次写入消息，都有记录offset，可以理解为代表位置的偏移量。consumer消费消息后，会定时把自己消费的消息offset提交，代表已经消费，下次如果重启，就从上次消费的offset继续消费。</li>
+<li>但是如果我某个消息，在消费后，offset还没提交，服务器宕机了，即kafka没有更新offset的记录，那么下次服务恢复后该消息还是会被消费一次。这样我们就需要保证消息幂等</li>
+</ul>
+</li>
+<li><p>解决方案</p>
+<ul>
+<li>1.通过数据库的主键比对，如我执行的操作，是否数据库已经有了，有了我就update一下，或者不做操作</li>
+<li>2.比如redis，操作每次都是set，自身支持幂等的，不用特殊处理</li>
+<li>3.让生产者发送消息的时候绑定一个全局唯一id，根据这个id判定是否已消息过(判定方法，可以使用数据库或者redis缓存起来这个id)</li>
+</ul>
+</li>
+</ul>
+<h2 id="如何处理消息丢失？"><a href="#如何处理消息丢失？" class="headerlink" title="如何处理消息丢失？"></a>如何处理消息丢失？</h2><ul>
+<li>consumer丢失消息</li>
+<li>kafka丢失消息</li>
+<li>生产者丢失消息</li>
+</ul>
+<h2 id="如何保证消息的顺序性"><a href="#如何保证消息的顺序性" class="headerlink" title="如何保证消息的顺序性"></a>如何保证消息的顺序性</h2><h2 id="写一个消息队列，该如何进行架构设计"><a href="#写一个消息队列，该如何进行架构设计" class="headerlink" title="写一个消息队列，该如何进行架构设计"></a>写一个消息队列，该如何进行架构设计</h2>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/mk-passby">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+
+
+</html>
